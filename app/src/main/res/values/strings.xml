@@ -3,4 +3,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="list_array">
+    <item>Incoming</item>
+    <item>Outgoing</item>
+    <item>Incoming/Outgoing</item>
+    </string-array>
+
 </resources>
