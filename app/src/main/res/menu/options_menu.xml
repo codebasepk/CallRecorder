@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/select_all"
+        android:title="Select all"
+        app:showAsAction="collapseActionView"/>
+
+    <item android:id="@+id/unselect_all"
+        android:title="Unselect all"
+        app:showAsAction="collapseActionView"/>
+
+    <item android:id="@+id/search"
+        android:title="Search"
+        android:icon="@drawable/ic_menu_search"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView" />
+
+    <item android:id="@+id/action_done"
+        android:title="DONE"
+        android:icon="@drawable/ic_done"
+        app:showAsAction="ifRoom" />
+</menu>
