@@ -12,6 +12,7 @@ public class IncomingCallListener extends PhoneStateListener {
         super.onCallStateChanged(state, incomingNumber);
         switch (state) {
             case TelephonyManager.CALL_STATE_RINGING:
+                System.out.println("okay");
 
                 break;
             case TelephonyManager.CALL_STATE_IDLE:
@@ -26,6 +27,7 @@ public class IncomingCallListener extends PhoneStateListener {
         @Override
         public void onReceive(Context context, Intent intent) {
             String number = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
+            System.out.println(number);
         }
     };
 }
