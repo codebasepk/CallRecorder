@@ -1,16 +1,26 @@
 package com.byteshatf.callrecorder;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
-public class MainActivity extends AppCompatActivity {
+import com.byteshatf.callrecorder.contactpicker.ContactsPicker;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private ImageButton mSelectContactsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mSelectContactsButton = (ImageButton) findViewById(R.id.selectContacts);
+        mSelectContactsButton.setOnClickListener(this);
+
     }
 
     @Override
@@ -33,5 +43,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.selectContacts:
+                Intent intent = new Intent(getApplicationContext(), ContactsPicker.class);
+                startActivityForResult(intent,AppGlobals.REQUEST_CODE);
+                break;
+        }
+
     }
 }
