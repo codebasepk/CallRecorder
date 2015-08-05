@@ -10,16 +10,13 @@ import android.widget.ImageButton;
 
 import com.byteshatf.callrecorder.contactpicker.ContactsPicker;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
-    private ImageButton mSelectContactsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mSelectContactsButton = (ImageButton) findViewById(R.id.selectContacts);
-        mSelectContactsButton.setOnClickListener(this);
 
     }
 
@@ -43,16 +40,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.selectContacts:
-                Intent intent = new Intent(getApplicationContext(), ContactsPicker.class);
-                startActivityForResult(intent,AppGlobals.REQUEST_CODE);
-                break;
-        }
-
     }
 }
