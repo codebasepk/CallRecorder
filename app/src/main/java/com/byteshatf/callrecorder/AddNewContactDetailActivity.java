@@ -15,17 +15,17 @@ public class AddNewContactDetailActivity extends AppCompatActivity implements Vi
     private ImageButton mSelectContactsButton;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.add_details);
-        mSelectContactsButton = (ImageButton) findViewById(R.id.selectContacts);
+        mSelectContactsButton = (ImageButton) findViewById(R.id.imageButton);
         mSelectContactsButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.selectContacts:
+            case R.id.imageButton:
                 Intent intent = new Intent(getApplicationContext(), ContactsPicker.class);
                 startActivityForResult(intent,AppGlobals.REQUEST_CODE);
                 break;

@@ -22,7 +22,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".contactpicker.ContactsPicker" android:label="Select contacts"/>
-        <activity android:name=".AddNewContactDetailActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".AddNewContactDetailActivity"
+            android:label="New Contact" />
     </application>
 
 </manifest>
