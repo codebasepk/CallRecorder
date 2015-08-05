@@ -5,8 +5,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.database.Cursor;
+import android.os.Environment;
 import android.provider.ContactsContract;
+import android.telephony.TelephonyManager;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,5 +48,16 @@ public class Helpers extends ContextWrapper {
         }
         cursor.close();
         return contactNumbers;
+    }
+
+    TelephonyManager getTelephonyManager() {
+        return (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+    }
+
+    void incomingCallFolder() {
+        File path = new File(Environment.getExternalStorageDirectory() + "/" + "Incoming Call Record");
+        if (!path.exists()) {
+            path.mkdir();
+        }
     }
 }
