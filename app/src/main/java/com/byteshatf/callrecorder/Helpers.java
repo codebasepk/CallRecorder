@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
 
@@ -73,7 +74,7 @@ public class Helpers extends ContextWrapper {
     }
 
     public void saveValuesAsSetStringForNewRules() {
-        SharedPreferences sharedPreferences  = getSharedPrefrencemanager();
+        SharedPreferences sharedPreferences = getSharedPrefrencemanager();
 
     }
 
@@ -87,5 +88,19 @@ public class Helpers extends ContextWrapper {
             arrayList.add(fileList[i].getName());
         }
         return arrayList;
+    }
+
+    public void specialRecordingEnabled(boolean ENABLED) {
+        SharedPreferences sharedPreferences = getPreferenceManager();
+        sharedPreferences.edit().putBoolean("specialRec", ENABLED).apply();
+    }
+
+    public boolean isSpecialRecordingEnabled() {
+        SharedPreferences sharedPreferences = getPreferenceManager();
+        return sharedPreferences.getBoolean("specialRec", false);
+    }
+
+    private SharedPreferences getPreferenceManager() {
+        return PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 }
