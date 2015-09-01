@@ -2,4 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+
+    <ListView
+        android:id="@+id/recording_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:choiceMode="multipleChoice"
+        android:clickable="true"
+        android:divider="@android:color/white">
+    </ListView>
 </RelativeLayout>
