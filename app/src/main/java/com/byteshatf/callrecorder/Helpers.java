@@ -74,21 +74,16 @@ public class Helpers extends ContextWrapper {
         return preferences;
     }
 
-<<<<<<< HEAD
     public void saveValuesAsSetStringForNewRules(Set<String> value) {
         SharedPreferences sharedPreferences  = getSharedPrefrencemanager();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putStringSet(AppGlobals.sStringSetValueKey, value);
         editor.apply();
     }
-=======
-    public void saveValuesAsSetStringForNewRules() {
-        SharedPreferences sharedPreferences = getSharedPrefrencemanager();
->>>>>>> upstream/master
 
     public Set<String> getAlReadyExistRules() {
-        SharedPreferences preferences = AppGlobals.getContext().getSharedPreferences(AppGlobals.sStringSetValueKey, 0);
-        return preferences.getStringSet("TotalMonths", null);
+        SharedPreferences preferences = AppGlobals.getContext().getSharedPreferences(sharedPrefrence, 0);
+        return preferences.getStringSet(AppGlobals.sStringSetValueKey, null);
     }
 
     public ArrayList<String> getAllFilesFromFolder() {
