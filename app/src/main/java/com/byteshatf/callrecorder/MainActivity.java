@@ -22,7 +22,6 @@ import android.view.MenuItem;
 import com.byteshatf.callrecorder.Fragments.RecordingListFragment;
 import com.byteshatf.callrecorder.Fragments.RulesFragment;
 import com.byteshatf.callrecorder.Listeners.IncomingCallListener;
-import com.byteshatf.callrecorder.contactpicker.ContactsPicker;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         builder.setMessage("Would you like to add your recording rule?");
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(), ContactsPicker.class);
+                Intent intent = new Intent(getApplicationContext(), AddRuleActivity.class);
                 startActivity(intent);
                 dialog.dismiss();
             }

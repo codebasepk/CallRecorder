@@ -5,9 +5,16 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="list_array">
-    <item>Incoming</item>
-    <item>Outgoing</item>
-    <item>Incoming/Outgoing</item>
+        <item>All Incoming Calls</item>
+        <item>All Outgoing Calls</item>
+        <item>All Incoming/Outgoing</item>
+        <item>Selected only</item>
+    </string-array>
+
+    <string-array name="rules_array">
+        <item>incoming</item>
+        <item>outgoing</item>
+        <item>incoming/outgoing</item>
     </string-array>
 
 </resources>

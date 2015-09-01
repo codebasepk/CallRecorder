@@ -4,6 +4,7 @@ package com.byteshatf.callrecorder;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
@@ -15,6 +16,8 @@ import java.util.List;
 import java.util.TimeZone;
 
 public class Helpers extends ContextWrapper {
+
+    private String sharedPrefrence = "call_recorder";
 
     public Helpers(Context base) {
         super(base);
@@ -60,6 +63,17 @@ public class Helpers extends ContextWrapper {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         simpleDateFormat.setTimeZone(TimeZone.getDefault());
         return simpleDateFormat.format(calendar.getTime());
+    }
+
+    public SharedPreferences getSharedPrefrencemanager() {
+        SharedPreferences preferences = AppGlobals.getContext().getSharedPreferences(sharedPrefrence,
+                Context.MODE_PRIVATE);
+        return preferences;
+    }
+
+    public void saveValuesAsSetStringForNewRules() {
+        SharedPreferences sharedPreferences  = getSharedPrefrencemanager();
+
     }
 
 }

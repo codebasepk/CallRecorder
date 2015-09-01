@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".contactpicker.ContactsPicker" android:label="Select contacts"/>
+        <activity android:name=".AddRuleActivity"/>
     </application>
 
 </manifest>

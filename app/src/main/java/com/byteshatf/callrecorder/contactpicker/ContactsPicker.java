@@ -3,6 +3,8 @@ package com.byteshatf.callrecorder.contactpicker;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneNumberUtils;
@@ -31,6 +33,7 @@ public class ContactsPicker extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#9999FF")));
         setContentView(R.layout.contacts_picker_activity);
         mNames = Helpers.getAllContactNames();
         List<String> numbers = Helpers.getAllContactNumbers();

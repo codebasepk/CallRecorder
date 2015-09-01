@@ -13,7 +13,7 @@ public class AppGlobals extends Application {
     public static final int REQUEST_CODE = 199;
     static Context sContext;
 
-    static Context getContext() {
+    public static Context getContext() {
         return sContext;
     }
 
