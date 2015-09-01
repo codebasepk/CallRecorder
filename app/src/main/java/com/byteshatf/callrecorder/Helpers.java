@@ -74,7 +74,6 @@ public class Helpers extends ContextWrapper {
 
     public void saveValuesAsSetStringForNewRules() {
         SharedPreferences sharedPreferences  = getSharedPrefrencemanager();
-        SharedPreferences.Editor
 
     }
 
