@@ -15,6 +15,7 @@
             android:text="Record On :"
             android:textStyle="bold"
             />
+
         <Spinner
             android:layout_width="193dp"
             android:layout_height="wrap_content"
