@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
 
@@ -73,12 +74,17 @@ public class Helpers extends ContextWrapper {
         return preferences;
     }
 
+<<<<<<< HEAD
     public void saveValuesAsSetStringForNewRules(Set<String> value) {
         SharedPreferences sharedPreferences  = getSharedPrefrencemanager();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putStringSet(AppGlobals.sStringSetValueKey, value);
         editor.apply();
     }
+=======
+    public void saveValuesAsSetStringForNewRules() {
+        SharedPreferences sharedPreferences = getSharedPrefrencemanager();
+>>>>>>> upstream/master
 
     public Set<String> getAlReadyExistRules() {
         SharedPreferences preferences = AppGlobals.getContext().getSharedPreferences(AppGlobals.sStringSetValueKey, 0);
@@ -95,5 +101,19 @@ public class Helpers extends ContextWrapper {
             arrayList.add(fileList[i].getName());
         }
         return arrayList;
+    }
+
+    public void specialRecordingEnabled(boolean ENABLED) {
+        SharedPreferences sharedPreferences = getPreferenceManager();
+        sharedPreferences.edit().putBoolean("specialRec", ENABLED).apply();
+    }
+
+    public boolean isSpecialRecordingEnabled() {
+        SharedPreferences sharedPreferences = getPreferenceManager();
+        return sharedPreferences.getBoolean("specialRec", false);
+    }
+
+    private SharedPreferences getPreferenceManager() {
+        return PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 }

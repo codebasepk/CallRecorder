@@ -18,6 +18,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
 
     private ImageButton imageButton;
     private EditText editText;
+    private String editTextData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33b5e5")));
         imageButton = (ImageButton) findViewById(R.id.imageButton);
         editText = (EditText) findViewById(R.id.editText);
+        editTextData = editText.getText().toString();
         imageButton.setOnClickListener(this);
     }
 
@@ -51,8 +53,10 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
         int id = item.getItemId();
 
         if (id == R.id.action_done) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            if (!editTextData.isEmpty() && editTextData != null) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
         }
         return super.onOptionsItemSelected(item);
     }
