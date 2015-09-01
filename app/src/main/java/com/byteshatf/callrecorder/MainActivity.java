@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import com.byteshatf.callrecorder.Fragments.RecordingListFragment;
 import com.byteshatf.callrecorder.Fragments.RulesFragment;
 import com.byteshatf.callrecorder.Listeners.IncomingCallListener;
+import com.byteshatf.callrecorder.contactpicker.ContactsPicker;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -85,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(getApplicationContext(), AddNewContactDetailActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(getApplicationContext(), AddNewContactDetailActivity.class);
+//            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         builder.setMessage("Would you like to add your recording rule?");
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(), AddNewContactDetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ContactsPicker.class);
                 startActivity(intent);
                 dialog.dismiss();
             }
@@ -139,10 +140,10 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 
             switch (num) {
                 case 0:
-                    mFragment = new RecordingListFragment();
+                    mFragment = new RulesFragment();
                     break;
                 case 1:
-                    mFragment = new RulesFragment();
+                    mFragment = new RecordingListFragment();
                     break;
             }
             return mFragment;
