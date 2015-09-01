@@ -19,7 +19,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_details);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#9999FF")));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33b5e5")));
         imageButton = (ImageButton) findViewById(R.id.imageButton);
         imageButton.setOnClickListener(this);
     }
