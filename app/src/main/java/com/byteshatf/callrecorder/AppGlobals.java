@@ -14,7 +14,7 @@ public class AppGlobals extends Application {
     static Context sContext;
     public static String path = "CallRec" + "/" + Helpers.getTimeStamp() + ".aac";
 
-    static Context getContext() {
+    public static Context getContext() {
         return sContext;
     }
 

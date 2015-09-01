@@ -52,7 +52,7 @@ public class Helpers extends ContextWrapper {
         return contactNumbers;
     }
 
-    TelephonyManager getTelephonyManager() {
+    public TelephonyManager getTelephonyManager() {
         return (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
     }
 

@@ -4,19 +4,21 @@ import android.media.MediaRecorder;
 
 import java.io.IOException;
 
-public class CallRecording extends MediaRecorder {
+public class CallRecording {
 
     public static boolean isRecording;
+    private MediaRecorder mediaRecorder;
 
     public void startRecord() {
-        setAudioSource(AudioSource.MIC);
-        setAudioEncodingBitRate(96000);
-        setOutputFormat(OutputFormat.DEFAULT);
-        setAudioEncoder(AudioEncoder.AAC);
-        setOutputFile(AppGlobals.getDataDirectory(AppGlobals.path));
+        mediaRecorder = new MediaRecorder();
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mediaRecorder.setAudioEncodingBitRate(96000);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+        mediaRecorder.setOutputFile(AppGlobals.getDataDirectory("CallRec") + "/" + Helpers.getTimeStamp() + ".aac");
         try {
-            prepare();
-            start();
+            mediaRecorder.prepare();
+            mediaRecorder.start();
             isRecording = true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -24,9 +26,9 @@ public class CallRecording extends MediaRecorder {
     }
 
     public void stopRecording() {
-        stop();
-        reset();
-        release();
+        mediaRecorder.stop();
+        mediaRecorder.reset();
+        mediaRecorder.release();
         isRecording = false;
 
     }
