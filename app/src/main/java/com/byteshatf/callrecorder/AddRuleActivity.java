@@ -51,7 +51,6 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.action_done) {
             if (!editTextData.isEmpty() && editTextData != null) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
