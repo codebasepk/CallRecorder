@@ -8,23 +8,20 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v4.app.*;
-import android.support.v4.app.ListFragment;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.ListView;
 
-import com.byteshatf.callrecorder.contactpicker.ContactsPicker;
+import com.byteshatf.callrecorder.Fragments.RecordingListFragment;
+import com.byteshatf.callrecorder.Fragments.RulesFragment;
+import com.byteshatf.callrecorder.Listeners.IncomingCallListener;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -41,13 +38,12 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
     private Resources mResources;
     private Fragment mFragment;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.MyAppTheme);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#689F39")));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#9999FF")));
         getSupportActionBar().setElevation(0);
         mHelpers = new Helpers(getApplicationContext());
         mIncomingCallListener = new IncomingCallListener();
@@ -91,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         if (id == R.id.action_settings) {
             Intent intent = new Intent(getApplicationContext(), AddNewContactDetailActivity.class);
             startActivity(intent);
-          }
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -102,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         builder.setMessage("Would you like to add your recording rule?");
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(),AddNewContactDetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddNewContactDetailActivity.class);
                 startActivity(intent);
                 dialog.dismiss();
             }

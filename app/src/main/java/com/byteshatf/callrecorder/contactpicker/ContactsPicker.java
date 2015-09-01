@@ -36,7 +36,7 @@ public class ContactsPicker extends AppCompatActivity {
         List<String> numbers = Helpers.getAllContactNumbers();
         ArrayList<String> output = getFormattedListEntries(mNames, numbers);
         listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice,
-                                         output);
+                output);
         mListView = (ListView) findViewById(R.id.list);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         mListView.setAdapter(listAdapter);
@@ -67,7 +67,6 @@ public class ContactsPicker extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
-
         // Associate searchable configuration with the SearchView
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -87,7 +86,7 @@ public class ContactsPicker extends AppCompatActivity {
                     if (mNames.get(i).toLowerCase().startsWith(newText.toLowerCase())) {
                         mListView.setSelection(i);
                         break;
-                    } else if (mNames.get(i).toLowerCase().contains(newText.toLowerCase())){
+                    } else if (mNames.get(i).toLowerCase().contains(newText.toLowerCase())) {
                         mListView.setSelection(i);
                         break;
                     }
@@ -95,7 +94,6 @@ public class ContactsPicker extends AppCompatActivity {
                 return true;
             }
         });
-
         return true;
     }
 
@@ -143,6 +141,5 @@ public class ContactsPicker extends AppCompatActivity {
             entries.add(result);
         }
         return entries;
-
     }
 }

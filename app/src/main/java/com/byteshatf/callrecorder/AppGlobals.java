@@ -9,18 +9,12 @@ import java.io.File;
 
 public class AppGlobals extends Application {
 
-    static Context sContext;
     public static final int RESULT_OK = 200;
     public static final int REQUEST_CODE = 199;
+    static Context sContext;
 
     static Context getContext() {
         return sContext;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        sContext = getApplicationContext();
     }
 
     public static String getDataDirectory(String type) {
@@ -36,5 +30,11 @@ public class AppGlobals extends Application {
             file.mkdirs();
         }
         return file.getAbsolutePath();
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        sContext = getApplicationContext();
     }
 }
