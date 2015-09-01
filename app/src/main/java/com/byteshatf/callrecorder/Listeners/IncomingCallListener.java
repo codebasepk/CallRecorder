@@ -13,6 +13,7 @@ import com.byteshatf.callrecorder.Helpers;
 public class IncomingCallListener extends PhoneStateListener {
 
     CallRecording callRecording = new CallRecording();
+    Helpers helpers = new Helpers(AppGlobals.getContext());
 
     @Override
     public void onCallStateChanged(int state, String incomingNumber) {
@@ -27,8 +28,10 @@ public class IncomingCallListener extends PhoneStateListener {
                 }
                 break;
             case TelephonyManager.CALL_STATE_OFFHOOK:
-                callRecording.startRecord();
-                System.out.println("okay");
+                if (helpers.isSpecialRecordingEnabled()) {
+                    callRecording.startRecord();
+                    System.out.println("okay");
+                }
                 break;
         }
     }
