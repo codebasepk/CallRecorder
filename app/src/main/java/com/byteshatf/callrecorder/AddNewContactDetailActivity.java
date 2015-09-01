@@ -3,7 +3,6 @@ package com.byteshatf.callrecorder;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,7 +35,7 @@ public class AddNewContactDetailActivity extends AppCompatActivity implements Vi
         switch (v.getId()) {
             case R.id.imageButton:
                 Intent intent = new Intent(getApplicationContext(), ContactsPicker.class);
-                startActivityForResult(intent,AppGlobals.REQUEST_CODE);
+                startActivityForResult(intent, AppGlobals.REQUEST_CODE);
                 break;
         }
     }

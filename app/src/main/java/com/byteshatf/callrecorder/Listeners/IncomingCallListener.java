@@ -1,10 +1,12 @@
-package com.byteshatf.callrecorder;
+package com.byteshatf.callrecorder.Listeners;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+
+import com.byteshatf.callrecorder.CallRecording;
 
 public class IncomingCallListener extends PhoneStateListener {
 
@@ -29,7 +31,7 @@ public class IncomingCallListener extends PhoneStateListener {
         }
     }
 
-    BroadcastReceiver mOutgoingCall = new BroadcastReceiver() {
+    public BroadcastReceiver mOutgoingCall = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String number = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);

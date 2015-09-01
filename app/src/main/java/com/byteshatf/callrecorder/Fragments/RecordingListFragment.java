@@ -1,4 +1,4 @@
-package com.byteshatf.callrecorder;
+package com.byteshatf.callrecorder.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.byteshatf.callrecorder.R;
 
 public class RecordingListFragment extends android.support.v4.app.Fragment {
 

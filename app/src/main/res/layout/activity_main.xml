@@ -8,7 +8,7 @@
             android:id="@+id/tab_host"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            app:primaryColor="#689F39"
+            app:primaryColor="#9999FF"
             app:accentColor="#CC0000"
             app:hasIcons="true" />
 
