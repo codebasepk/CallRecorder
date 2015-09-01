@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         super.onCreate(savedInstanceState);
         setTheme(R.style.MyAppTheme);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33b5e5")));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#d3d3d3")));
         getSupportActionBar().setElevation(0);
         mHelpers = new Helpers(getApplicationContext());
         mIncomingCallListener = new IncomingCallListener();
@@ -161,9 +161,9 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
     private Drawable getIcon(int position) {
         switch (position) {
             case 0:
-                return mResources.getDrawable(R.drawable.list);
-            case 1:
                 return mResources.getDrawable(R.drawable.rule);
+            case 1:
+                return mResources.getDrawable(R.drawable.list);
             default:
                 return null;
         }
