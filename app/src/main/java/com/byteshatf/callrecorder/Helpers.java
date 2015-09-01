@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -62,4 +63,15 @@ public class Helpers extends ContextWrapper {
         return simpleDateFormat.format(calendar.getTime());
     }
 
+    public ArrayList<String> getAllFilesFromFolder() {
+        File dir = new File(AppGlobals.getDataDirectory("CallRec"));
+        File[] fileList = dir.listFiles();
+        String[] theNamesOfFiles = new String[fileList.length];
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < theNamesOfFiles.length; i++) {
+            theNamesOfFiles[i] = fileList[i].getName();
+            arrayList.add(fileList[i].getName());
+        }
+        return arrayList;
+    }
 }

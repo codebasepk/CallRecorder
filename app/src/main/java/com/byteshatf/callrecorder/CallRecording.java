@@ -13,7 +13,7 @@ public class CallRecording extends MediaRecorder {
         setAudioEncodingBitRate(96000);
         setOutputFormat(OutputFormat.DEFAULT);
         setAudioEncoder(AudioEncoder.AAC);
-        setOutputFile(AppGlobals.getDataDirectory("CallRec") + "/" + Helpers.getTimeStamp() + "test.aac");
+        setOutputFile(AppGlobals.getDataDirectory(AppGlobals.path));
         try {
             prepare();
             start();

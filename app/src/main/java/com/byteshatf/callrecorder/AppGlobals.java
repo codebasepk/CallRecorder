@@ -12,6 +12,7 @@ public class AppGlobals extends Application {
     public static final int RESULT_OK = 200;
     public static final int REQUEST_CODE = 199;
     static Context sContext;
+    public static String path = "CallRec" + "/" + Helpers.getTimeStamp() + ".aac";
 
     static Context getContext() {
         return sContext;
