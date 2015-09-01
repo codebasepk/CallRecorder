@@ -7,18 +7,24 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
 public class IncomingCallListener extends PhoneStateListener {
+
+    CallRecording callRecording = new CallRecording();
+
     @Override
     public void onCallStateChanged(int state, String incomingNumber) {
         super.onCallStateChanged(state, incomingNumber);
         switch (state) {
             case TelephonyManager.CALL_STATE_RINGING:
-                System.out.println("okay");
 
                 break;
             case TelephonyManager.CALL_STATE_IDLE:
-
+                if (CallRecording.isRecording) {
+                    callRecording.stopRecording();
+                }
                 break;
             case TelephonyManager.CALL_STATE_OFFHOOK:
+                callRecording.startRecord();
+                System.out.println("okay");
                 break;
         }
     }

@@ -2,6 +2,9 @@ package com.byteshatf.callrecorder;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Environment;
+
+import java.io.File;
 
 
 public class AppGlobals extends Application {
@@ -18,5 +21,20 @@ public class AppGlobals extends Application {
     public void onCreate() {
         super.onCreate();
         sContext = getApplicationContext();
+    }
+
+    public static String getDataDirectory(String type) {
+        String sdcard = Environment.getExternalStorageDirectory().getAbsolutePath();
+        String dataDirectory = sdcard + "/Android/data/";
+        String directoryPath = dataDirectory
+                + sContext.getPackageName()
+                + File.separator
+                + type
+                + File.separator;
+        File file = new File(directoryPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return file.getAbsolutePath();
     }
 }

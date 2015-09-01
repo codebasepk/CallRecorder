@@ -10,8 +10,11 @@ import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 public class Helpers extends ContextWrapper {
 
@@ -60,4 +63,12 @@ public class Helpers extends ContextWrapper {
             path.mkdir();
         }
     }
+
+    public static String getTimeStamp() {
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        simpleDateFormat.setTimeZone(TimeZone.getDefault());
+        return simpleDateFormat.format(calendar.getTime());
+    }
+
 }
