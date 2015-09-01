@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 import java.util.TimeZone;
 
 public class Helpers extends ContextWrapper {
@@ -73,9 +74,16 @@ public class Helpers extends ContextWrapper {
         return preferences;
     }
 
-    public void saveValuesAsSetStringForNewRules() {
-        SharedPreferences sharedPreferences = getSharedPrefrencemanager();
+    public void saveValuesAsSetStringForNewRules(Set<String> value) {
+        SharedPreferences sharedPreferences  = getSharedPrefrencemanager();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putStringSet(AppGlobals.sStringSetValueKey, value);
+        editor.apply();
+    }
 
+    public Set<String> getAlReadyExistRules() {
+        SharedPreferences preferences = AppGlobals.getContext().getSharedPreferences(sharedPrefrence, 0);
+        return preferences.getStringSet(AppGlobals.sStringSetValueKey, null);
     }
 
     public ArrayList<String> getAllFilesFromFolder() {

@@ -34,14 +34,28 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Attach Contacts"
+        android:id="@+id/textView"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageButton"
+        android:layout_marginTop="20dp"
         android:src="@drawable/contacts_icon"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/spinner"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText" />
 
 
 

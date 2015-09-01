@@ -19,9 +19,9 @@ import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.byteshatf.callrecorder.Fragments.RecordingListFragment;
-import com.byteshatf.callrecorder.Fragments.RulesFragment;
-import com.byteshatf.callrecorder.Listeners.IncomingCallListener;
+import com.byteshatf.callrecorder.fragments.RecordingListFragment;
+import com.byteshatf.callrecorder.fragments.RulesFragment;
+import com.byteshatf.callrecorder.listeners.IncomingCallListener;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
