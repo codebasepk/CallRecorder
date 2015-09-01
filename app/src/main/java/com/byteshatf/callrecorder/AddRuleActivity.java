@@ -5,7 +5,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.byteshatf.callrecorder.contactpicker.ContactsPicker;
@@ -14,6 +17,7 @@ import com.byteshatf.callrecorder.contactpicker.ContactsPicker;
 public class AddRuleActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton imageButton;
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.add_details);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#9999FF")));
         imageButton = (ImageButton) findViewById(R.id.imageButton);
+        editText = (EditText) findViewById(R.id.editText);
         imageButton.setOnClickListener(this);
     }
 
@@ -32,6 +37,23 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
                 startActivityForResult(intent, AppGlobals.REQUEST_CODE);
                 break;
         }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.add_rules_done, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_done) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
