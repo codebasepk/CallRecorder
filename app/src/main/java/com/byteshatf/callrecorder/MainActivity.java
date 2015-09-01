@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_NEW_OUTGOING_CALL);
         registerReceiver(mIncomingCallListener.mOutgoingCall, intentFilter);
         showDialogForFirstTime();
-
         mMaterialTabHost = (MaterialTabHost) findViewById(R.id.tab_host);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mResources = getResources();
