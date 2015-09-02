@@ -21,7 +21,8 @@ import com.byteshatf.callrecorder.database.DatabaseHelpers;
 
 import java.util.ArrayList;
 
-public class RulesFragment extends android.support.v4.app.Fragment implements Spinner.OnItemSelectedListener {
+public class RulesFragment extends android.support.v4.app.Fragment implements Spinner.OnItemSelectedListener,
+        AdapterView.OnItemClickListener {
 
     private View baseView;
     private Spinner mSpinner;
@@ -64,6 +65,7 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
         super.onResume();
         if (mListViewDisplayed) {
             mListView.setAdapter(mArrayAdapter);
+            mListView.setOnItemClickListener(this);
         }
     }
 
@@ -75,6 +77,12 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        System.out.println(parent.getItemAtPosition(position));
 
     }
 
@@ -106,7 +114,6 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
 
     private String getDirectionThumbnail(String title) {
         String uriBase = "android.resource://com.fgm.callrecorder/";
-        System.out.println(title);
         int specificIcon = mHelpers.getValuesFromSharedPreferences(title, Call.TURN_OFF);
         return getDirectionIcon(uriBase, specificIcon);
     }
