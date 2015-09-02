@@ -14,7 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_main"
-        android:entries="@array/list_array"
         android:layout_alignParentRight="true"/>
     <CheckBox
         android:id="@+id/checkboxUnknownCalls"
@@ -27,4 +26,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rulesList" />
+    <Button
+        android:id="@+id/main_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@+id/rulesList"
+        android:layout_toRightOf="@+id/checkboxUnknownCalls"
+        android:layout_toEndOf="@+id/checkboxUnknownCalls"
+        android:layout_marginBottom="41dp" />
 </RelativeLayout>

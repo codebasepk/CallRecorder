@@ -108,6 +108,16 @@ public class Helpers extends ContextWrapper {
         return sharedPreferences.getBoolean("specialRec", false);
     }
 
+    public void saveSpinnerState(String key, int value) {
+        SharedPreferences sharedPreferences = getPreferenceManager();
+        sharedPreferences.edit().putInt(key, value).apply();
+    }
+
+    public int getSpinnerValue(String key) {
+        SharedPreferences sharedPreferences = getSharedPrefrencemanager();
+        return sharedPreferences.getInt(key, 0);
+    }
+
     private SharedPreferences getPreferenceManager() {
         return PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
