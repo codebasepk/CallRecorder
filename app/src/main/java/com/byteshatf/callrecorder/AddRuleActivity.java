@@ -1,18 +1,29 @@
 package com.byteshatf.callrecorder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.byteshatf.callrecorder.contactpicker.ContactsPicker;
+import com.byteshatf.callrecorder.database.DatabaseHelpers;
+
+import java.util.ArrayList;
 
 
 public class AddRuleActivity extends AppCompatActivity implements View.OnClickListener {
@@ -23,15 +34,24 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     private boolean mShowTemporaryCheckedContacts = false;
     private String mCheckedContacts;
     private boolean isStartedFresh = false;
+    private Spinner mSpinner;
+    private int mSpinnerValue;
+    private DatabaseHelpers mDatabaseHelpers;
+    private Switch mSwitch;
+    private ListView mContactsListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_details);
         isStartedFresh = true;
+        mDatabaseHelpers = new DatabaseHelpers(getApplicationContext());
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33b5e5")));
+        mSpinner = (Spinner) findViewById(R.id.spinner_add_fragment);
         imageButton = (ImageButton) findViewById(R.id.imageButton);
+        mSwitch = (Switch) findViewById(R.id.switch1);
         editText = (EditText) findViewById(R.id.et_title);
+        mContactsListView = (ListView) findViewById(R.id.lv_edit_rule);
         imageButton.setOnClickListener(this);
     }
 
@@ -39,6 +59,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageButton:
+                mCheckedContacts = null;
                 Intent intent = new Intent(getApplicationContext(), ContactsPicker.class);
                 intent.putExtra("pre_checked", mCheckedContacts);
                 intent.putExtra("temporary_select", mShowTemporaryCheckedContacts);
@@ -58,6 +79,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_done) {
+            mSpinnerValue = mSpinner.getSelectedItemPosition();
             editTextData = editText.getText().toString();
             if (editTextData.isEmpty()) {
                 Toast.makeText(getApplicationContext(), "please enter a title", Toast.LENGTH_SHORT).show();
@@ -70,6 +92,8 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
             }
 
             if (!editTextData.isEmpty() && editTextData != null && mCheckedContacts != null) {
+                mDatabaseHelpers.createNewEntry(editTextData, String.valueOf(mSwitch.isChecked()),
+                        mCheckedContacts, mSpinnerValue);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
@@ -90,8 +114,52 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
                         mCheckedContacts = null;
                     } else {
                         mCheckedContacts = extras.getString("selected_contacts");
+                        String[] items = mCheckedContacts.split(",");
+                        ArrayList<String> arrayList = new ArrayList<>();
+                        for (String item : items) {
+                            arrayList.add(item);
+                        }
+                        ArrayAdapter<String> arrayAdapter = new FinalizedContacts(getApplicationContext(),
+                                R.layout.row, arrayList);
+                        mContactsListView.setAdapter(arrayAdapter);
                     }
                 }
+
+        }
+    }
+
+    class FinalizedContacts extends ArrayAdapter<String> {
+
+        private ArrayList<String> mArrayList;
+
+
+        public FinalizedContacts(Context context, int resource,
+                                 ArrayList<String> arrayList) {
+            super(context, resource, arrayList);
+            mArrayList = arrayList;
+
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                LayoutInflater inflater = getLayoutInflater();
+                convertView = inflater.inflate(R.layout.row, parent, false);
+                holder = new ViewHolder();
+                holder.title = (TextView) convertView.findViewById(R.id.FilePath);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            String title = mArrayList.get(position);
+            holder.title.setText(title);
+            return convertView;
+        }
+
+        class ViewHolder {
+            public TextView title;
         }
     }
 }

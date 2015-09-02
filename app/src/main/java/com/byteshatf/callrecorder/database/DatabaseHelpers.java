@@ -28,12 +28,13 @@ public class DatabaseHelpers extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void createNewEntry(String title, int state, String contacts) {
+    public void createNewEntry(String title, String state, String contacts, int spinnerValue) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DatabaseConstants.TITLE, title);
         values.put(DatabaseConstants.STATE, state);
         values.put(DatabaseConstants.CONTACTS, contacts);
+        values.put(DatabaseConstants.SPINNER_STATE, spinnerValue);
         values.put(DatabaseConstants.DATE_COLUMN, Helpers.getTimeStampForDatabase());
         sqLiteDatabase.insert(DatabaseConstants.TABLE_NAME, null, values);
         Log.i(AppGlobals.getLogTag(getClass()), "created New Entry");
