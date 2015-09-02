@@ -24,7 +24,7 @@ import com.byteshatf.callrecorder.database.DatabaseHelpers;
 import java.util.ArrayList;
 
 public class RulesFragment extends android.support.v4.app.Fragment implements Spinner.OnItemSelectedListener,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private View baseView;
     private Spinner mSpinner;
@@ -68,6 +68,7 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
         if (mListViewDisplayed) {
             mListView.setAdapter(mArrayAdapter);
             mListView.setOnItemClickListener(this);
+            mListView.setOnItemLongClickListener(this);
         }
     }
 
@@ -87,6 +88,13 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
         intent.putExtra("title",  parent.getItemAtPosition(position).toString());
         startActivity(intent);
 
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        System.out.println(parent.getItemAtPosition(position));
+
+        return true;
     }
 
     class CategoriesAdapter extends ArrayAdapter<String> {
