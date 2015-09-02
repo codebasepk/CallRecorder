@@ -1,5 +1,7 @@
 package com.byteshatf.callrecorder;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
     private MaterialTabHost mMaterialTabHost;
     private Resources mResources;
     private Fragment mFragment;
-    AlertDialog levelDialog;
+    private AlertDialog levelDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
