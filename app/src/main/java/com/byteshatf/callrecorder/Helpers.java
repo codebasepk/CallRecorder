@@ -70,12 +70,6 @@ public class Helpers extends ContextWrapper {
         return simpleDateFormat.format(calendar.getTime());
     }
 
-    public SharedPreferences getSharedPrefrencemanager() {
-        SharedPreferences preferences = AppGlobals.getContext().getSharedPreferences(sharedPrefrence,
-                Context.MODE_PRIVATE);
-        return preferences;
-    }
-
     public ArrayList<String> getAllFilesFromFolder() {
         File dir = new File(AppGlobals.getDataDirectory("CallRec"));
         File[] fileList = dir.listFiles();
@@ -104,7 +98,7 @@ public class Helpers extends ContextWrapper {
     }
 
     public int getValuesFromSharedPreferences(String key, int defaultValue) {
-        SharedPreferences sharedPreferences = getSharedPrefrencemanager();
+        SharedPreferences sharedPreferences = getPreferenceManager();
         return sharedPreferences.getInt(key, defaultValue);
     }
 

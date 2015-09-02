@@ -48,7 +48,6 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
                     .getApplicationContext(), R.layout.main_listview, arrayList);
             mListViewDisplayed = true;
         }
-
         mSpinner.setOnItemSelectedListener(this);
         String[] mainSpinner = {"All Incoming Calls", "All Outgoing Calls", "All Incoming/Outgoing",
                 "Unknown Calls Only","Selected Only"};
@@ -94,7 +93,6 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
                 holder = new ViewHolder();
                 holder.title = (TextView) convertView.findViewById(R.id.FilePath);
                 holder.direction = (ImageView) convertView.findViewById(R.id.call_direction);
-                System.out.println(holder.direction);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -108,13 +106,13 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
 
     private String getDirectionThumbnail(String title) {
         String uriBase = "android.resource://com.fgm.callrecorder/";
+        System.out.println(title);
         int specificIcon = mHelpers.getValuesFromSharedPreferences(title, Call.TURN_OFF);
-        System.out.println("SPvalue"+specificIcon);
-        return getDirectionIconForPremium(uriBase, specificIcon);
+        return getDirectionIcon(uriBase, specificIcon);
     }
 
     @NonNull
-    private String getDirectionIconForPremium(String uriBase, int noteShowPreference) {
+    private String getDirectionIcon(String uriBase, int noteShowPreference) {
         switch (noteShowPreference) {
             case Call.SHOW_INCOMING_CALL:
                 return uriBase + R.drawable.incoming_call;
@@ -136,6 +134,6 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
         static final int SHOW_INCOMING_CALL = 0;
         static final int SHOW_OUTGOING_CALL = 1;
         static final int SHOW_INCOMING_OUTGOING = 2;
-        static final int TURN_OFF = 3;
+        public static final int TURN_OFF = 3;
     }
 }
