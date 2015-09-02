@@ -84,8 +84,8 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-//            Intent intent = new Intent(getApplicationContext(), AddNewContactDetailActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(getApplicationContext(), AddRuleActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

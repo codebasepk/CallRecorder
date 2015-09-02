@@ -1,54 +1,30 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_marginTop="20dp"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:id="@+id/linearLayout">
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/linearLayout">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:textSize="18sp"
-            android:text="Record On :"
-            android:textStyle="bold"
-            />
-
-        <Spinner
-            android:layout_width="193dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner"
-            android:entries="@array/list_array"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-    </RelativeLayout>
-
+        android:textSize="18sp"
+        android:text="Record On :"
+        android:textStyle="bold"/>
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_main"
+        android:entries="@array/list_array"
+        android:layout_alignParentRight="true"/>
+    <CheckBox
+        android:id="@+id/checkboxUnknownCalls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Always record all unknown calls"
+        android:checked="false"
+        android:layout_below="@+id/spinner_main"/>
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rulesList"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_marginBottom="66dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <CheckBox
-        android:id="@+id/recording_enable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:layout_centerInParent="true"/>
-
-
+        android:id="@+id/rulesList" />
 </RelativeLayout>
