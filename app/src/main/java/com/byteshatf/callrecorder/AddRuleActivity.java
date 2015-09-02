@@ -123,8 +123,9 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
             } else if (AppGlobals.getUpdateStatus()) {
                 mHelpers.saveValues(editTextData, mSpinnerValue);
-                mHelpers.saveSwitchState((AppGlobals.sSwitchState+editTextData).trim(), mSwitch.isChecked());
+                mHelpers.saveSwitchState((AppGlobals.sSwitchState + editTextData).trim(), mSwitch.isChecked());
                 mDatabaseHelpers.updateCategory(mId, editTextData, mCheckedContacts);
+                AppGlobals.setUpdateStatus(false);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         }
