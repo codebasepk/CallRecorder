@@ -6,7 +6,9 @@
     android:orientation="horizontal"
     android:weightSum="100"
     android:layout_margin="2dp"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:background="@drawable/listview_background"
+    >
 
     <LinearLayout
         android:layout_width="wrap_content"
