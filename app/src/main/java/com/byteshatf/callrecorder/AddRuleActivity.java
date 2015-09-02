@@ -31,7 +31,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
         isStartedFresh = true;
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33b5e5")));
         imageButton = (ImageButton) findViewById(R.id.imageButton);
-        editText = (EditText) findViewById(R.id.editText);
+        editText = (EditText) findViewById(R.id.et_title);
         imageButton.setOnClickListener(this);
     }
 

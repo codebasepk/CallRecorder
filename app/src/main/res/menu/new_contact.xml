@@ -10,7 +10,4 @@
     android:icon="@drawable/ic_done"
     android:title="Apply Button"
     app:showAsAction="ifRoom"/>
-
-
-
 </menu>
