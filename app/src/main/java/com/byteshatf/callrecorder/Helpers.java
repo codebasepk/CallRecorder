@@ -1,9 +1,12 @@
 package com.byteshatf.callrecorder;
 
 
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.preference.PreferenceManager;
@@ -15,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 import java.util.TimeZone;
 
 public class Helpers extends ContextWrapper {
@@ -74,18 +76,6 @@ public class Helpers extends ContextWrapper {
         return preferences;
     }
 
-    public void saveValuesAsSetStringForNewRules(Set<String> value) {
-        SharedPreferences sharedPreferences  = getSharedPrefrencemanager();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putStringSet(AppGlobals.sStringSetValueKey, value);
-        editor.apply();
-    }
-
-    public Set<String> getAlReadyExistRules() {
-        SharedPreferences preferences = AppGlobals.getContext().getSharedPreferences(sharedPrefrence, 0);
-        return preferences.getStringSet(AppGlobals.sStringSetValueKey, null);
-    }
-
     public ArrayList<String> getAllFilesFromFolder() {
         File dir = new File(AppGlobals.getDataDirectory("CallRec"));
         File[] fileList = dir.listFiles();
@@ -108,14 +98,14 @@ public class Helpers extends ContextWrapper {
         return sharedPreferences.getBoolean("specialRec", false);
     }
 
-    public void saveSpinnerState(String key, int value) {
+    public void saveValues(String key, int value) {
         SharedPreferences sharedPreferences = getPreferenceManager();
         sharedPreferences.edit().putInt(key, value).apply();
     }
 
-    public int getSpinnerValue(String key) {
+    public int getValuesFromSharedPreferences(String key, int defaultValue) {
         SharedPreferences sharedPreferences = getSharedPrefrencemanager();
-        return sharedPreferences.getInt(key, 0);
+        return sharedPreferences.getInt(key, defaultValue);
     }
 
     private SharedPreferences getPreferenceManager() {
@@ -127,5 +117,26 @@ public class Helpers extends ContextWrapper {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         simpleDateFormat.setTimeZone(TimeZone.getDefault());
         return simpleDateFormat.format(calendar.getTime());
+    }
+
+    public void showDialogForFirstTime() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Welcome!");
+        builder.setMessage("Would you like to add your recording rule?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getApplicationContext(), AddRuleActivity.class);
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

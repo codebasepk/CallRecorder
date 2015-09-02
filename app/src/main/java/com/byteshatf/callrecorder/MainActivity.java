@@ -1,7 +1,5 @@
 package com.byteshatf.callrecorder;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -39,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         setContentView(R.layout.activity_main);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#d3d3d3")));
         getSupportActionBar().setElevation(0);
-        showDialogForFirstTime();
         mMaterialTabHost = (MaterialTabHost) findViewById(R.id.tab_host);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mResources = getResources();
@@ -78,27 +75,6 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void showDialogForFirstTime() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Welcome!");
-        builder.setMessage("Would you like to add your recording rule?");
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(), AddRuleActivity.class);
-                startActivity(intent);
-                dialog.dismiss();
-            }
-        });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
     }
 
     @Override

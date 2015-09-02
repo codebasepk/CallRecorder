@@ -9,7 +9,6 @@ public class DatabaseConstants {
     public static final String TITLE = "title";
     public static final String STATE = "state";
     public static final String CONTACTS = "contacts";
-    public static final String SPINNER_STATE = "spinner_state";
     public static final String ID_COLUMN = "ID";
     public static final String DATE_COLUMN = "DATETIME";
 
@@ -20,6 +19,5 @@ public class DatabaseConstants {
                     TITLE + " TEXT UNIQUE , " +
                     STATE + " TEXT , " +
                     CONTACTS + " TEXT, " +
-                    SPINNER_STATE + " INTEGER , "+
                     DATE_COLUMN + " TEXT" + " ) ";
 }
