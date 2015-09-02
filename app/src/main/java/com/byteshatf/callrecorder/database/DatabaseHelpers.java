@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class DatabaseHelpers extends SQLiteOpenHelper {
 
     public DatabaseHelpers(Context context) {
-        super(context, DatabaseConstants.DATABASE_NAME, null, 1);
+        super(context, DatabaseConstants.DATABASE_NAME, null, DatabaseConstants.DATABASE_VERSION);
     }
 
     @Override
