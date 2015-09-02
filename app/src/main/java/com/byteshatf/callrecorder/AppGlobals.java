@@ -14,6 +14,7 @@ public class AppGlobals extends Application {
     public static final String sStringSetValueKey = "All_rules";
     private static Context sContext;
     public static String path = "CallRec" + "/" + Helpers.getTimeStamp() + ".aac";
+    public static String LOGTAG = "Call_Recorder";
 
     public static Context getContext() {
         return sContext;
@@ -38,5 +39,9 @@ public class AppGlobals extends Application {
     public void onCreate() {
         super.onCreate();
         sContext = getApplicationContext();
+    }
+
+    public static String getLogTag(Class aClass) {
+        return LOGTAG + aClass.getName();
     }
 }
