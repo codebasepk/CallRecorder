@@ -40,6 +40,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     private Switch mSwitch;
     private ListView mContactsListView;
     private Helpers mHelpers;
+    ArrayList<String> arrayList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +61,10 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageButton:
-                mCheckedContacts = null;
                 Intent intent = new Intent(getApplicationContext(), ContactsPicker.class);
                 intent.putExtra("pre_checked", mCheckedContacts);
                 intent.putExtra("temporary_select", mShowTemporaryCheckedContacts);
+                mCheckedContacts = null;
                 startActivityForResult(intent, AppGlobals.REQUEST_CODE);
                 break;
         }
@@ -113,18 +114,22 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
                     isStartedFresh = false;
                     Bundle extras = data.getExtras();
                     if (extras == null) {
-                        mCheckedContacts = null;
+                        System.out.println("OK");
                     } else {
                         mCheckedContacts = extras.getString("selected_contacts");
                         if (mCheckedContacts != null) {
+                            mContactsListView.setAdapter(null);
                             String[] items = mCheckedContacts.split(",");
-                            ArrayList<String> arrayList = new ArrayList<>();
+                            arrayList = new ArrayList<>();
                             for (String item : items) {
                                 arrayList.add(item);
                             }
                             ArrayAdapter<String> arrayAdapter = new FinalizedContacts(getApplicationContext(),
                                     R.layout.row, arrayList);
                             mContactsListView.setAdapter(arrayAdapter);
+                        } else {
+                            mCheckedContacts = null;
+                            mContactsListView.setAdapter(null);
                         }
                     }
                 }
