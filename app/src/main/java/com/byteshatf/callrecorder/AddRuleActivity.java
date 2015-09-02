@@ -39,6 +39,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseHelpers mDatabaseHelpers;
     private Switch mSwitch;
     private ListView mContactsListView;
+    private Helpers mHelpers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,8 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
 
             if (!editTextData.isEmpty() && editTextData != null && mCheckedContacts != null) {
                 mDatabaseHelpers.createNewEntry(editTextData, String.valueOf(mSwitch.isChecked()),
-                        mCheckedContacts, mSpinnerValue);
+                        mCheckedContacts);
+                mHelpers.saveValues(editTextData, mSpinnerValue);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
@@ -148,7 +150,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
                 LayoutInflater inflater = getLayoutInflater();
                 convertView = inflater.inflate(R.layout.row, parent, false);
                 holder = new ViewHolder();
-                holder.title = (TextView) convertView.findViewById(R.id.FilePath);
+                holder.title = (TextView) convertView.findViewById(R.id.title);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
