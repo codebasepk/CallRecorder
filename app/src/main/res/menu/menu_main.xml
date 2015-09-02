@@ -6,7 +6,7 @@
         app:showAsAction="always"
         android:title="Settings" />
     <item android:id="@+id/action_add"
-        android:icon="@drawable/add_new"
+        android:icon="@drawable/ic_add_list"
         app:showAsAction="always"
         android:title="Add new rule" />
 </menu>

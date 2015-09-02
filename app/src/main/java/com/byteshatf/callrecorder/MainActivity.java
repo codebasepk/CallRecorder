@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
             case 0:
                 return mResources.getDrawable(R.drawable.rule);
             case 1:
-                return mResources.getDrawable(R.drawable.list);
+                return mResources.getDrawable(R.drawable.ic_list_filled);
             default:
                 return null;
         }
