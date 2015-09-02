@@ -20,8 +20,7 @@
         <Spinner
             android:layout_width="193dp"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner"
-            android:entries="@array/list_array"
+            android:id="@+id/main_spinner"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 

@@ -4,13 +4,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-    <string-array name="list_array">
-        <item>All Incoming Calls</item>
-        <item>All Outgoing Calls</item>
-        <item>All Incoming/Outgoing</item>
-        <item>Selected only</item>
-    </string-array>
-
     <string-array name="rules_array">
         <item>incoming</item>
         <item>outgoing</item>
