@@ -1,6 +1,5 @@
 package com.byteshatf.callrecorder.fragments;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.byteshatf.callrecorder.AddRuleActivity;
-import com.byteshatf.callrecorder.AppGlobals;
 import com.byteshatf.callrecorder.Helpers;
 import com.byteshatf.callrecorder.R;
 
@@ -25,6 +23,7 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Vi
     private Spinner mSpinner;
     private Helpers mHelpers;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Vi
         mSpinner = (Spinner) baseView.findViewById(R.id.main_spinner);
         mSpinner.setOnItemSelectedListener(this);
         String[] mainSpinner = {"All Incoming Calls", "All Outgoing Calls", "All Incoming/outgoing",
-                "Selected Only"};
+                "Unknown Calls Only","Selected Only"};
         ArrayAdapter<String> arrayAdapter;
         arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,
                 mainSpinner);

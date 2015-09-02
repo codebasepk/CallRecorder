@@ -1,13 +1,11 @@
 <resources>
     <string name="app_name">Auto Call Recorder</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
     <string-array name="rules_array">
-        <item>incoming</item>
-        <item>outgoing</item>
-        <item>incoming/outgoing</item>
+        <item>Incoming</item>
+        <item>Outgoing</item>
+        <item>Incoming/Outgoing</item>
     </string-array>
-
 </resources>

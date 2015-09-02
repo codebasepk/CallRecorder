@@ -3,7 +3,6 @@ package com.byteshatf.callrecorder;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,14 +13,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.byteshatf.callrecorder.fragments.RecordingListFragment;
 import com.byteshatf.callrecorder.fragments.RulesFragment;
-import com.byteshatf.callrecorder.listeners.IncomingCallListener;
+import com.byteshatf.callrecorder.services.CallRecordingService;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -29,9 +26,6 @@ import it.neokree.materialtabs.MaterialTabListener;
 
 public class MainActivity extends AppCompatActivity implements MaterialTabListener {
 
-    private Helpers mHelpers;
-    private IncomingCallListener mIncomingCallListener;
-    private TelephonyManager mTelephonyManager;
     private String[] mListTitles;
     private ViewPager mViewPager;
     private MaterialTabHost mMaterialTabHost;
@@ -45,12 +39,6 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         setContentView(R.layout.activity_main);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#d3d3d3")));
         getSupportActionBar().setElevation(0);
-        mHelpers = new Helpers(getApplicationContext());
-        mIncomingCallListener = new IncomingCallListener();
-        mTelephonyManager = mHelpers.getTelephonyManager();
-        mTelephonyManager.listen(mIncomingCallListener, PhoneStateListener.LISTEN_CALL_STATE);
-        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_NEW_OUTGOING_CALL);
-        registerReceiver(mIncomingCallListener.mOutgoingCall, intentFilter);
         showDialogForFirstTime();
         mMaterialTabHost = (MaterialTabHost) findViewById(R.id.tab_host);
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -66,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         for (int i = 0; i < mViewPagerAdapter.getCount(); i++) {
             mMaterialTabHost.addTab(mMaterialTabHost.newTab().setIcon(getIcon(i)).setTabListener(this));
         }
+        startService(new Intent(getApplicationContext(), CallRecordingService.class));
     }
 
     @Override
@@ -84,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-//            Intent intent = new Intent(getApplicationContext(), AddNewContactDetailActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(getApplicationContext(), AddRuleActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
