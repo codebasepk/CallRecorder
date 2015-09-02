@@ -29,8 +29,8 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Vi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         baseView = inflater.inflate(R.layout.rules_fragment, container, false);
         mHelpers = new Helpers(getActivity());
-        mButton = (Button) baseView.findViewById(R.id.button);
-        mSpinner = (Spinner) baseView.findViewById(R.id.main_spinner);
+        mButton = (Button) baseView.findViewById(R.id.main_button);
+        mSpinner = (Spinner) baseView.findViewById(R.id.spinner_main);
         mSpinner.setOnItemSelectedListener(this);
         String[] mainSpinner = {"All Incoming Calls", "All Outgoing Calls", "All Incoming/outgoing",
                 "Unknown Calls Only","Selected Only"};
@@ -48,7 +48,7 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Vi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button:
+            case R.id.main_button:
                 startActivity(new Intent(getActivity(), AddRuleActivity.class));
                 break;
         }
