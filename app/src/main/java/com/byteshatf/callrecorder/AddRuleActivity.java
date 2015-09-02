@@ -46,7 +46,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.add_details);
         isStartedFresh = true;
         mDatabaseHelpers = new DatabaseHelpers(getApplicationContext());
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33b5e5")));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#006666")));
         mSpinner = (Spinner) findViewById(R.id.spinner_add_fragment);
         imageButton = (ImageButton) findViewById(R.id.imageButton);
         mSwitch = (Switch) findViewById(R.id.switch1);

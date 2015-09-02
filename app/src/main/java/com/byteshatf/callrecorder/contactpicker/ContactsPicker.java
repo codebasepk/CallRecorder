@@ -33,7 +33,7 @@ public class ContactsPicker extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33b5e5")));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#006666")));
         setContentView(R.layout.contacts_picker_activity);
         mNames = Helpers.getAllContactNames();
         List<String> numbers = Helpers.getAllContactNumbers();

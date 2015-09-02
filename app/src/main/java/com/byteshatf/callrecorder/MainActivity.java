@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         super.onCreate(savedInstanceState);
         setTheme(R.style.MyAppTheme);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#d3d3d3")));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#006666")));
         getSupportActionBar().setElevation(0);
         showDialogForFirstTime();
         mMaterialTabHost = (MaterialTabHost) findViewById(R.id.tab_host);
