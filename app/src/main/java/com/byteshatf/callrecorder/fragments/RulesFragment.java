@@ -1,6 +1,7 @@
 package com.byteshatf.callrecorder.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.byteshatf.callrecorder.AddRuleActivity;
 import com.byteshatf.callrecorder.Helpers;
 import com.byteshatf.callrecorder.R;
 import com.byteshatf.callrecorder.database.DatabaseHelpers;
@@ -22,7 +24,7 @@ import com.byteshatf.callrecorder.database.DatabaseHelpers;
 import java.util.ArrayList;
 
 public class RulesFragment extends android.support.v4.app.Fragment implements Spinner.OnItemSelectedListener,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private View baseView;
     private Spinner mSpinner;
@@ -66,13 +68,13 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
         if (mListViewDisplayed) {
             mListView.setAdapter(mArrayAdapter);
             mListView.setOnItemClickListener(this);
+            mListView.setOnItemLongClickListener(this);
         }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mHelpers.saveValues("key", parent.getSelectedItemPosition());
-        System.out.println(parent.getSelectedItemPosition());
     }
 
     @Override
@@ -82,8 +84,17 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getActivity(), AddRuleActivity.class);
+        intent.putExtra("title",  parent.getItemAtPosition(position).toString());
+        startActivity(intent);
+
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         System.out.println(parent.getItemAtPosition(position));
 
+        return true;
     }
 
     class CategoriesAdapter extends ArrayAdapter<String> {

@@ -15,6 +15,8 @@ public class AppGlobals extends Application {
     private static Context sContext;
     public static String path = "CallRec" + "/" + Helpers.getTimeStamp() + ".aac";
     public static String LOGTAG = "Call_Recorder";
+    public static String sSwitchState = "switch_state";
+    public static boolean sUpdateInProgress = false;
 
     public static Context getContext() {
         return sContext;
@@ -43,5 +45,13 @@ public class AppGlobals extends Application {
 
     public static String getLogTag(Class aClass) {
         return LOGTAG + aClass.getName();
+    }
+
+    public static void setUpdateStatus(boolean status) {
+        sUpdateInProgress = status;
+    }
+
+    public static boolean getUpdateStatus() {
+        return sUpdateInProgress;
     }
 }

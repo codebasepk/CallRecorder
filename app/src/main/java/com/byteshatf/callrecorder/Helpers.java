@@ -22,8 +22,6 @@ import java.util.TimeZone;
 
 public class Helpers extends ContextWrapper {
 
-    private String sharedPrefrence = "call_recorder";
-
     public Helpers(Context base) {
         super(base);
     }
@@ -133,4 +131,16 @@ public class Helpers extends ContextWrapper {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+    public void saveSwitchState(String key, boolean value) {
+        SharedPreferences sharedPreferences = getPreferenceManager();
+        sharedPreferences.edit().putBoolean(key, value).apply();
+    }
+
+    public boolean getSwitchState(String key) {
+        SharedPreferences sharedPreferences = getPreferenceManager();
+        return sharedPreferences.getBoolean(key, true);
+    }
+
+
 }

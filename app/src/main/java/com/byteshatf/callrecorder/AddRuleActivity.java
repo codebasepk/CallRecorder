@@ -40,7 +40,8 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     private Switch mSwitch;
     private ListView mContactsListView;
     private Helpers mHelpers;
-    ArrayList<String> arrayList = null;
+    private ArrayList<String> arrayList = null;
+    private String mId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.add_details);
         isStartedFresh = true;
         mDatabaseHelpers = new DatabaseHelpers(getApplicationContext());
+        mHelpers = new Helpers(getApplicationContext());
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#006666")));
         mSpinner = (Spinner) findViewById(R.id.spinner_add_fragment);
         imageButton = (ImageButton) findViewById(R.id.imageButton);
@@ -55,6 +57,25 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
         editText = (EditText) findViewById(R.id.et_title);
         mContactsListView = (ListView) findViewById(R.id.lv_edit_rule);
         imageButton.setOnClickListener(this);
+        if (getIntent().getExtras() != null) {
+            AppGlobals.setUpdateStatus(true);
+            String title = getIntent().getExtras().getString("title", "");
+            editText.setText(title);
+            String[] detailsForThisNote = mDatabaseHelpers.retrieveNoteDetails(title);
+            mId = detailsForThisNote[0];
+            mCheckedContacts = detailsForThisNote[1];
+            setTitle("Edit Category");
+            mSpinner.setSelection(mHelpers.getValuesFromSharedPreferences(title, 0));
+            mSwitch.setChecked(mHelpers.getSwitchState((AppGlobals.sSwitchState+title).trim()));
+            String[] items = mCheckedContacts.split(",");
+            arrayList = new ArrayList<>();
+            for (String item : items) {
+                arrayList.add(item);
+            }
+            ArrayAdapter<String> arrayAdapter = new FinalizedContacts(getApplicationContext(),
+                    R.layout.row, arrayList);
+            mContactsListView.setAdapter(arrayAdapter);
+        }
     }
 
     @Override
@@ -93,12 +114,19 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
                 return false;
             }
 
-            if (!editTextData.isEmpty() && editTextData != null && mCheckedContacts != null) {
-                mDatabaseHelpers.createNewEntry(editTextData, String.valueOf(mSwitch.isChecked()),
-                        mCheckedContacts);
+            if (!editTextData.isEmpty() && editTextData != null && mCheckedContacts != null &&
+                    !AppGlobals.getUpdateStatus()) {
+                mDatabaseHelpers.createNewEntry(editTextData,mCheckedContacts);
                 mHelpers.saveValues(editTextData, mSpinnerValue);
+                mHelpers.saveSwitchState((AppGlobals.sSwitchState+editTextData).trim(), mSwitch.isChecked());
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+            } else if (AppGlobals.getUpdateStatus()) {
+                mHelpers.saveValues(editTextData, mSpinnerValue);
+                mHelpers.saveSwitchState((AppGlobals.sSwitchState + editTextData).trim(), mSwitch.isChecked());
+                mDatabaseHelpers.updateCategory(mId, editTextData, mCheckedContacts);
+                AppGlobals.setUpdateStatus(false);
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         }
         return super.onOptionsItemSelected(item);
