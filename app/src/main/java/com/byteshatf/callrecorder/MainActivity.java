@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.byteshatf.callrecorder.fragments.RecordingListFragment;
 import com.byteshatf.callrecorder.fragments.RulesFragment;
@@ -29,13 +30,14 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
     private MaterialTabHost mMaterialTabHost;
     private Resources mResources;
     private Fragment mFragment;
+    AlertDialog levelDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.MyAppTheme);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#d3d3d3")));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#006666")));
         getSupportActionBar().setElevation(0);
         mMaterialTabHost = (MaterialTabHost) findViewById(R.id.tab_host);
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -68,8 +70,35 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            final CharSequence[] items = {"Default", "Mic", "Voice Call", "Voice Communication"};
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Select Audio Source");
+            builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    switch(item)
+                    {
+                        case 0:
+                            Toast.makeText(getApplicationContext(), "Audio Source: Default", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 1:
+                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Call", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 2:
+                            Toast.makeText(getApplicationContext(), "Audio Source: Mic", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 3:
+                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Communication", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                    levelDialog.dismiss();
+                }
+            });
+            levelDialog = builder.create();
+            levelDialog.show();
+        }
+
+        if (id == R.id.action_add) {
             Intent intent = new Intent(getApplicationContext(), AddRuleActivity.class);
             startActivity(intent);
         }
@@ -79,18 +108,14 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 
     @Override
     public void onTabSelected(MaterialTab materialTab) {
-
-    }
-
-    @Override
-    public void onTabReselected(MaterialTab materialTab) {
         mViewPager.setCurrentItem(materialTab.getPosition());
     }
 
     @Override
-    public void onTabUnselected(MaterialTab materialTab) {
+    public void onTabReselected(MaterialTab materialTab) {}
 
-    }
+    @Override
+    public void onTabUnselected(MaterialTab materialTab) {}
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 

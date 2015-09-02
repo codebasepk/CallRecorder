@@ -50,7 +50,7 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
         }
 
         mSpinner.setOnItemSelectedListener(this);
-        String[] mainSpinner = {"All Incoming Calls", "All Outgoing Calls", "All Incoming/outgoing",
+        String[] mainSpinner = {"All Incoming Calls", "All Outgoing Calls", "All Incoming/Outgoing",
                 "Unknown Calls Only","Selected Only"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item, mainSpinner);

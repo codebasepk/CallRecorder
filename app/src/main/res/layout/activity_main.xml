@@ -8,8 +8,8 @@
             android:id="@+id/tab_host"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            app:primaryColor="#5BC3EA"
-            app:accentColor="#9FDCF3"
+            app:primaryColor="#005151"
+            app:accentColor="#d3d3d3"
             app:hasIcons="true" />
 
         <android.support.v4.view.ViewPager
