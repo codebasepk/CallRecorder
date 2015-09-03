@@ -105,11 +105,11 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
             mSpinnerValue = mSpinner.getSelectedItemPosition();
             editTextData = editText.getText().toString();
             if (editTextData.isEmpty()) {
-                Toast.makeText(getApplicationContext(), "please enter a title", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please enter a title", Toast.LENGTH_SHORT).show();
                 return false;
             }
             if (mCheckedContacts == null) {
-                Toast.makeText(getApplicationContext(), "please select at least one contact",
+                Toast.makeText(getApplicationContext(), "Please select at least one contact",
                         Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -167,15 +167,11 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     class FinalizedContacts extends ArrayAdapter<String> {
 
         private ArrayList<String> mArrayList;
-
-
         public FinalizedContacts(Context context, int resource,
                                  ArrayList<String> arrayList) {
             super(context, resource, arrayList);
             mArrayList = arrayList;
-
         }
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
@@ -188,12 +184,10 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-
             String title = mArrayList.get(position);
             holder.title.setText(title);
             return convertView;
         }
-
         class ViewHolder {
             public TextView title;
         }
