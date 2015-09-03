@@ -29,7 +29,7 @@ public class CallRecording {
         mediaRecorder.stop();
         mediaRecorder.reset();
         mediaRecorder.release();
+        mediaRecorder = null;
         isRecording = false;
-
     }
 }

@@ -84,10 +84,10 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
                             Toast.makeText(getApplicationContext(), "Audio Source: Default", Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Call", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Audio Source: Mic", Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Mic", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Call", Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
                             Toast.makeText(getApplicationContext(), "Audio Source: Voice Communication", Toast.LENGTH_SHORT).show();
