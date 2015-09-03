@@ -144,7 +144,6 @@ public class Helpers extends ContextWrapper {
     }
 
     public boolean contactExists(Context context, String number) {
-
         Uri uri = Uri.withAppendedPath(
                 ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
                 Uri.encode(number));
