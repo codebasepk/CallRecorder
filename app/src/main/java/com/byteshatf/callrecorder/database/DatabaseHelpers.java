@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 
 import com.byteshatf.callrecorder.AppGlobals;
@@ -92,29 +91,5 @@ public class DatabaseHelpers extends SQLiteOpenHelper {
         sqLiteDatabase.delete(DatabaseConstants.TABLE_NAME, DatabaseConstants.TITLE +
                 "=?", new String[]{value});
         sqLiteDatabase.close();
-    }
-
-    public String[] checkIfCurrentNumberExistInDatabase(String number) {
-        String[] finalResult = new String[2];
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-        String query="SELECT * FROM "+DatabaseConstants.TABLE_NAME;
-        Cursor  cursor = sqLiteDatabase.rawQuery(query,null);
-        while (cursor.moveToNext()) {
-            String allContacts = cursor.getString(cursor.getColumnIndex(DatabaseConstants.CONTACTS));
-            String[] contacts = allContacts.split(",");
-            for (String item: contacts) {
-                System.out.println("OK");
-                Log.i("this", number);
-                if (PhoneNumberUtils.compare(item, number)) {
-                    System.out.println("ContactMatch");
-                    finalResult[0] = "true";
-                    finalResult[1] = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TITLE));
-                    return finalResult;
-                }
-            }
-        }
-        sqLiteDatabase.close();
-        finalResult[0] = "false";
-        return finalResult;
     }
 }

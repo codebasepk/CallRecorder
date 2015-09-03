@@ -3,7 +3,7 @@ package com.byteshatf.callrecorder;
 import android.content.SharedPreferences;
 import android.media.MediaRecorder;
 import android.widget.Toast;
-
+import android.util.Log;
 import java.io.IOException;
 
 public class CallRecording {
@@ -42,6 +42,7 @@ public class CallRecording {
         try {
             mediaRecorder.prepare();
             mediaRecorder.start();
+            Log.i(AppGlobals.getLogTag(getClass()), "Recording started .....");
             isRecording = true;
         } catch (IOException e) {
             e.printStackTrace();
