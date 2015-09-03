@@ -10,7 +10,6 @@ import android.util.Log;
 
 import com.byteshatf.callrecorder.AppGlobals;
 import com.byteshatf.callrecorder.Helpers;
-import com.byteshatf.callrecorder.listeners.IncomingCallListener;
 
 import java.util.ArrayList;
 
@@ -95,7 +94,7 @@ public class DatabaseHelpers extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }
 
-    public String[] checkIfCurrentNumberExistInDatabase() {
+    public String[] checkIfCurrentNumberExistInDatabase(String number) {
         String[] finalResult = new String[2];
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         String query="SELECT * FROM "+DatabaseConstants.TABLE_NAME;
@@ -105,8 +104,8 @@ public class DatabaseHelpers extends SQLiteOpenHelper {
             String[] contacts = allContacts.split(",");
             for (String item: contacts) {
                 System.out.println("OK");
-                Log.i("this", IncomingCallListener.sCurrentNumber);
-                if (PhoneNumberUtils.compare(item, IncomingCallListener.sCurrentNumber)) {
+                Log.i("this", number);
+                if (PhoneNumberUtils.compare(item, number)) {
                     System.out.println("ContactMatch");
                     finalResult[0] = "true";
                     finalResult[1] = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TITLE));

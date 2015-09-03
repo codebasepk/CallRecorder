@@ -18,6 +18,7 @@ public class AppGlobals extends Application {
     public static String sSwitchState = "switch_state";
     public static boolean sUpdateInProgress = false;
     public static final String MAIN_SPINNER_KEY = "main_spinner_value";
+    public static String sCurrentNumber;
 
     public static Context getContext() {
         return sContext;

@@ -22,7 +22,7 @@ public class CallRecordingService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mIncomingCallListener = new IncomingCallListener(getApplicationContext());
+        mIncomingCallListener = new IncomingCallListener();
         mHelpers = new Helpers(getApplicationContext());
         mTelephonyManager = mHelpers.getTelephonyManager();
         mTelephonyManager.listen(mIncomingCallListener, PhoneStateListener.LISTEN_CALL_STATE);
