@@ -7,7 +7,9 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
+import com.byteshatf.callrecorder.AppGlobals;
 import com.byteshatf.callrecorder.Helpers;
 import com.byteshatf.callrecorder.listeners.IncomingCallListener;
 
@@ -26,6 +28,7 @@ public class CallRecordingService extends Service {
         mTelephonyManager.listen(mIncomingCallListener, PhoneStateListener.LISTEN_CALL_STATE);
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_NEW_OUTGOING_CALL);
         registerReceiver(mIncomingCallListener.mOutgoingCall, intentFilter);
+        Log.i(AppGlobals.getLogTag(getClass()), "service started ....");
         return START_STICKY;
     }
 
