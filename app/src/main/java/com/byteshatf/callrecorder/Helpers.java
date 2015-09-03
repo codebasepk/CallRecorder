@@ -160,4 +160,9 @@ public class Helpers extends ContextWrapper {
         }
         return false;
     }
+
+    public boolean getCheckBoxState() {
+        SharedPreferences sharedPreferences = getPreferenceManager();
+        return sharedPreferences.getBoolean(AppGlobals.sCheckBoxState, false);
+    }
 }

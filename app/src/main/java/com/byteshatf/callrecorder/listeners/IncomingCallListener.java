@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 import com.byteshatf.callrecorder.AppGlobals;
 import com.byteshatf.callrecorder.CallRecording;
@@ -71,6 +70,13 @@ public class IncomingCallListener extends PhoneStateListener {
                             }
                         }
                     }
+                    if (mHelpers.getCheckBoxState()) {
+                        if (!mHelpers.contactExists(AppGlobals.sCurrentNumber)) {
+                            if (!CallRecording.isRecording) {
+                                callRecording.startRecord();
+                            }
+                        }
+                    }
                     break;
             }
 
@@ -115,6 +121,15 @@ public class IncomingCallListener extends PhoneStateListener {
                        }
                     }
                 }
+                System.out.println(mHelpers.getCheckBoxState());
+                System.out.println(mHelpers.contactExists(AppGlobals.sCurrentNumber));
+                if (mHelpers.getCheckBoxState()) {
+                    if (!mHelpers.contactExists(AppGlobals.sCurrentNumber)) {
+                        if (!CallRecording.isRecording) {
+                            callRecording.startRecord();
+                        }
+                    }
+                }
                 break;
         }
     }
@@ -136,8 +151,6 @@ public class IncomingCallListener extends PhoneStateListener {
             String allContacts = cursor.getString(cursor.getColumnIndex(DatabaseConstants.CONTACTS));
             String[] contacts = allContacts.split(",");
             for (String item: contacts) {
-                System.out.println("OK");
-                Log.i("this", number);
                 if (PhoneNumberUtils.compare(item, number)) {
                     System.out.println("ContactMatch");
                     finalResult[0] = "true";

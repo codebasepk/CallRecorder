@@ -1,6 +1,7 @@
 package com.byteshatf.callrecorder;
 
 import android.media.MediaRecorder;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -20,6 +21,7 @@ public class CallRecording {
         try {
             mediaRecorder.prepare();
             mediaRecorder.start();
+            Log.i(AppGlobals.getLogTag(getClass()), "Recording started .....");
             isRecording = true;
         } catch (IOException e) {
             e.printStackTrace();
