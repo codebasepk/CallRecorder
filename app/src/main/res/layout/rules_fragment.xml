@@ -9,19 +9,23 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:text="Record On :"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"/>
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_main"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"/>
     <CheckBox
         android:id="@+id/checkboxUnknownCalls"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="Always record all unknown calls"
         android:checked="false"
-        android:layout_below="@+id/spinner_main"/>
+        android:layout_below="@+id/spinner_main"
+        android:visibility="invisible"/>
     <ListView
         android:id="@+id/rulesList"
         android:layout_width="fill_parent"
