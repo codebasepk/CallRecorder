@@ -100,7 +100,7 @@ public class Helpers extends ContextWrapper {
         return sharedPreferences.getInt(key, defaultValue);
     }
 
-    private SharedPreferences getPreferenceManager() {
+    public SharedPreferences getPreferenceManager() {
         return PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 
@@ -141,6 +141,5 @@ public class Helpers extends ContextWrapper {
         SharedPreferences sharedPreferences = getPreferenceManager();
         return sharedPreferences.getBoolean(key, true);
     }
-
 
 }

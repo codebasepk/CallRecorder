@@ -87,4 +87,10 @@ public class DatabaseHelpers extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }
 
+    public void deleteCategory(String value) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        sqLiteDatabase.delete(DatabaseConstants.TABLE_NAME, DatabaseConstants.TITLE +
+                "=?", new String[] { value });
+        sqLiteDatabase.close();
+    }
 }

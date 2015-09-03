@@ -2,7 +2,9 @@ package com.byteshatf.callrecorder.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +20,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class RecordingListFragment extends android.support.v4.app.Fragment implements AdapterView.OnItemLongClickListener {
+public class RecordingListFragment extends android.support.v4.app.Fragment implements AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener {
 
     private ArrayAdapter<String> arrayAdapter;
     private View view;
     private ListView mRecordList;
+    private MediaPlayer mp;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,7 +35,9 @@ public class RecordingListFragment extends android.support.v4.app.Fragment imple
         ArrayList<String> arrayList = helpers.getAllFilesFromFolder();
         arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, arrayList);
         mRecordList.setAdapter(arrayAdapter);
+        mp = new MediaPlayer();
         mRecordList.setOnItemLongClickListener(this);
+        mRecordList.setOnItemClickListener(this);
         return view;
     }
 
@@ -74,5 +79,22 @@ public class RecordingListFragment extends android.support.v4.app.Fragment imple
                 e.printStackTrace();
             }
         }
+    }
+
+    private void playSong(String songPath) {
+        try {
+            mp.reset();
+            mp.setDataSource(songPath);
+            mp.prepare();
+            mp.start();
+        } catch (IOException e) {
+            Log.v(getString(R.string.app_name), e.getMessage());
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String path = AppGlobals.getDataDirectory("CallRec")+ "/" + parent.getItemAtPosition(position) ;
+        playSong(path);
     }
 }
