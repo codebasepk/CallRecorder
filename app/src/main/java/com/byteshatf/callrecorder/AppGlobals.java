@@ -17,6 +17,7 @@ public class AppGlobals extends Application {
     public static String LOGTAG = "Call_Recorder";
     public static String sSwitchState = "switch_state";
     public static boolean sUpdateInProgress = false;
+    public static final String MAIN_SPINNER_KEY = "main_spinner_value";
 
     public static Context getContext() {
         return sContext;

@@ -62,7 +62,7 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
                 android.R.layout.simple_spinner_item, mainSpinner);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(arrayAdapter);
-        mSpinner.setSelection(mHelpers.getValuesFromSharedPreferences("key", 0));
+        mSpinner.setSelection(mHelpers.getValuesFromSharedPreferences(AppGlobals.MAIN_SPINNER_KEY, 0));
         return baseView;
     }
 
@@ -78,7 +78,7 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        mHelpers.saveValues("key", parent.getSelectedItemPosition());
+        mHelpers.saveValues(AppGlobals.MAIN_SPINNER_KEY, parent.getSelectedItemPosition());
     }
 
     @Override
@@ -96,7 +96,6 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
 
     @Override
     public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, long id) {
-        System.out.println(parent.getItemAtPosition(position));
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Delete");
         builder.setMessage("Do you want to delete this Rule?");

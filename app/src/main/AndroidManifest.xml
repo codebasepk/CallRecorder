@@ -29,8 +29,7 @@
         <activity android:name=".contactpicker.ContactsPicker" android:label="Select contacts"/>
         <activity android:name=".AddRuleActivity"/>
         <service android:name=".services.CallRecordingService" android:enabled="true"/>
-        <receiver android:name=".listeners.PhoneBootStateReader"
-            android:enabled="true"
+        <receiver android:name=".listeners.PhoneBootStateReader" android:enabled="true"
             android:exported="false">
             <intent-filter>
 
