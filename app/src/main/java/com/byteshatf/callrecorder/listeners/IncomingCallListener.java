@@ -31,16 +31,13 @@ public class IncomingCallListener extends PhoneStateListener {
         sCurrentNumber = incomingNumber;
         Log.i(AppGlobals.getLogTag(getClass()), sCurrentNumber);
         switch (state) {
-            case TelephonyManager.CALL_STATE_RINGING:
-
-                break;
             case TelephonyManager.CALL_STATE_IDLE:
                 if (CallRecording.isRecording) {
                     callRecording.stopRecording();
                 }
                 break;
             case TelephonyManager.CALL_STATE_OFFHOOK:
-                startRecording();
+                    startRecording();
                 break;
         }
     }
@@ -71,7 +68,6 @@ public class IncomingCallListener extends PhoneStateListener {
                             }
                         }
                     }
-
                     break;
             }
 

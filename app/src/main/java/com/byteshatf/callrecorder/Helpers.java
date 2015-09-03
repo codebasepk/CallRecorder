@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
@@ -63,7 +64,7 @@ public class Helpers extends ContextWrapper {
 
     public static String getTimeStamp() {
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         simpleDateFormat.setTimeZone(TimeZone.getDefault());
         return simpleDateFormat.format(calendar.getTime());
     }
@@ -142,4 +143,22 @@ public class Helpers extends ContextWrapper {
         return sharedPreferences.getBoolean(key, true);
     }
 
+    public boolean contactExists(Context context, String number) {
+
+        Uri uri = Uri.withAppendedPath(
+                ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                Uri.encode(number));
+        String[] phoneNumberProjection = { ContactsContract.PhoneLookup._ID,
+                ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME };
+        Cursor cursor = context.getContentResolver().query(uri, phoneNumberProjection, null, null, null);
+        try {
+            if (cursor.moveToFirst()) {
+                return true;
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return false;
+    }
 }
