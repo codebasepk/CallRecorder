@@ -3,6 +3,7 @@ package com.byteshatf.callrecorder;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -33,12 +34,16 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
     private Resources mResources;
     private Fragment mFragment;
     private AlertDialog levelDialog;
+    private SharedPreferences sharedPreferences;
+    private Helpers mHelpers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.MyAppTheme);
         setContentView(R.layout.activity_main);
+        mHelpers = new Helpers(getApplicationContext());
+        sharedPreferences = mHelpers.getPreferenceManager();
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#006666")));
         getSupportActionBar().setElevation(0);
         mMaterialTabHost = (MaterialTabHost) findViewById(R.id.tab_host);
@@ -81,16 +86,20 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
                     switch(item)
                     {
                         case 0:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Default", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Audio Source: MIC", Toast.LENGTH_SHORT).show();
+                            sharedPreferences.edit().putInt("radio_int", 0);
                             break;
                         case 1:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Mic", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Call", Toast.LENGTH_SHORT).show();
+                            sharedPreferences.edit().putInt("radio_int", 1);
                             break;
                         case 2:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Call", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Down-Link", Toast.LENGTH_SHORT).show();
+                            sharedPreferences.edit().putInt("radio_int", 2);
                             break;
                         case 3:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Communication", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Audio Source: Voice UP-Link", Toast.LENGTH_SHORT).show();
+                            sharedPreferences.edit().putInt("radio_int", 3);
                             break;
                     }
                     levelDialog.dismiss();
@@ -160,7 +169,6 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
                 return null;
         }
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
