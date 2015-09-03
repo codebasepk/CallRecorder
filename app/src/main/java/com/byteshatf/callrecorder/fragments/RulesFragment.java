@@ -1,7 +1,10 @@
 package com.byteshatf.callrecorder.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.byteshatf.callrecorder.AddRuleActivity;
+import com.byteshatf.callrecorder.AppGlobals;
 import com.byteshatf.callrecorder.Helpers;
 import com.byteshatf.callrecorder.R;
 import com.byteshatf.callrecorder.database.DatabaseHelpers;
@@ -91,8 +95,32 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
     }
 
     @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+    public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, long id) {
         System.out.println(parent.getItemAtPosition(position));
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Delete");
+        builder.setMessage("Do you want to delete this Rule?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mDatabaseHelpers.deleteCategory(parent.getItemAtPosition(position).toString());
+                SharedPreferences sharedPreferences = mHelpers.getPreferenceManager();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove(parent.getItemAtPosition(position).toString());
+                editor.remove((AppGlobals.sSwitchState +
+                        parent.getItemAtPosition(position).toString()).trim());
+                String item = mArrayAdapter.getItem(position);
+                mArrayAdapter.remove(item);
+                mArrayAdapter.notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
 
         return true;
     }
