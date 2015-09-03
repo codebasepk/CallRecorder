@@ -90,13 +90,18 @@ public class IncomingCallListener extends PhoneStateListener {
                 }
                 break;
             case 3:
+                if (!mHelpers.contactExists(AppGlobals.sCurrentNumber)) {
+                    if (!CallRecording.isRecording) {
+                        callRecording.startRecord();
+                    }
+                }
 
 
                 break;
             case 4:
                 if (checkIfCurrentNumberExistInDatabase(number)[0].equals("true")) {
                     String values = checkIfCurrentNumberExistInDatabase(number)[1];
-                    if (mHelpers.getSwitchState((AppGlobals.sSwitchState+values))) {
+                    if (mHelpers.getSwitchState((AppGlobals.sSwitchState + values))) {
                         int spinnerValue = mHelpers.getValuesFromSharedPreferences(values, 0);
                        switch (spinnerValue) {
                            case 0:

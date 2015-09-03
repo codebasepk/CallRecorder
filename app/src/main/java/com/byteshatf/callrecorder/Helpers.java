@@ -143,13 +143,13 @@ public class Helpers extends ContextWrapper {
         return sharedPreferences.getBoolean(key, true);
     }
 
-    public boolean contactExists(Context context, String number) {
+    public boolean contactExists(String number) {
         Uri uri = Uri.withAppendedPath(
                 ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
                 Uri.encode(number));
         String[] phoneNumberProjection = { ContactsContract.PhoneLookup._ID,
                 ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME };
-        Cursor cursor = context.getContentResolver().query(uri, phoneNumberProjection, null, null, null);
+        Cursor cursor = AppGlobals.getContext().getContentResolver().query(uri, phoneNumberProjection, null, null, null);
         try {
             if (cursor.moveToFirst()) {
                 return true;
