@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 
         if (id == R.id.action_settings) {
             final CharSequence[] items = {"Default", "Mic", "Voice Call", "Voice Communication"};
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Select Audio Source");
             builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int item) {
@@ -159,5 +159,11 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
             default:
                 return null;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        MainActivity.this.finish();
     }
 }

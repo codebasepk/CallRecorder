@@ -19,6 +19,7 @@ public class AppGlobals extends Application {
     public static boolean sUpdateInProgress = false;
     public static final String MAIN_SPINNER_KEY = "main_spinner_value";
     public static String sCurrentNumber;
+    public static String sCheckBoxState = "checkbox_unknowncalls_value";
 
     public static Context getContext() {
         return sContext;
