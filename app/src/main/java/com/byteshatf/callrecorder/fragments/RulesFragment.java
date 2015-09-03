@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -27,8 +29,9 @@ import com.byteshatf.callrecorder.database.DatabaseHelpers;
 
 import java.util.ArrayList;
 
+
 public class RulesFragment extends android.support.v4.app.Fragment implements Spinner.OnItemSelectedListener,
-        AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+        AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, CompoundButton.OnCheckedChangeListener {
 
     private View baseView;
     private Spinner mSpinner;
@@ -38,15 +41,21 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
     private DatabaseHelpers mDatabaseHelpers;
     private boolean mListViewDisplayed = false;
     private ArrayAdapter<String> mArrayAdapter;
+    private CheckBox mCheckBox;
+    private SharedPreferences mSharedPreferences;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         baseView = inflater.inflate(R.layout.rules_fragment, container, false);
         mHelpers = new Helpers(getActivity());
+        mSharedPreferences = mHelpers.getPreferenceManager();
         mDatabaseHelpers = new DatabaseHelpers(getActivity().getApplicationContext());
         mSpinner = (Spinner) baseView.findViewById(R.id.spinner_main);
         mListView = (ListView) baseView.findViewById(R.id.rulesList);
+        mCheckBox = (CheckBox) baseView.findViewById(R.id.checkboxUnknownCalls);
+        mCheckBox.setChecked(mSharedPreferences.getBoolean(AppGlobals.sCheckBoxState, false));
+        mCheckBox.setOnCheckedChangeListener(this);
         arrayList = mDatabaseHelpers.getAllPresentNotes();
         if (arrayList.isEmpty() && arrayList.size() == 0) {
             mHelpers.showDialogForFirstTime();
@@ -79,6 +88,11 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mHelpers.saveValues(AppGlobals.MAIN_SPINNER_KEY, parent.getSelectedItemPosition());
+        if(position == 4) {
+            mCheckBox.setVisibility(View.VISIBLE);
+        } else {
+            mCheckBox.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -122,6 +136,11 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
         builder.create().show();
 
         return true;
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        mSharedPreferences.edit().putBoolean(AppGlobals.sCheckBoxState, isChecked).apply();
     }
 
     class CategoriesAdapter extends ArrayAdapter<String> {
