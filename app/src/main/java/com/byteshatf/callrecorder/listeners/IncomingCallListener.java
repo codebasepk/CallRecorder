@@ -95,8 +95,6 @@ public class IncomingCallListener extends PhoneStateListener {
                         callRecording.startRecord();
                     }
                 }
-
-
                 break;
             case 4:
                 if (checkIfCurrentNumberExistInDatabase(number)[0].equals("true")) {
