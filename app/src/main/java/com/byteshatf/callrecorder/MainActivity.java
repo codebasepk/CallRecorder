@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            final CharSequence[] items = {"Default", "Mic", "Voice Call", "Voice Communication"};
+            final CharSequence[] items = {"Mic", "Voice Call", "Voice Up-Link", "Voice Down-Link"};
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Select Audio Source");
             builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
