@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         if (id == R.id.action_settings) {
             final Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.dialog_layout);
-            dialog.setTitle("select Mic source");
+            dialog.setTitle("Select Audio Source");
             RadioGroup radioGroup = (RadioGroup) dialog.findViewById(R.id.radioGroup);
             int value = sharedPreferences.getInt("radio_int", 0);
             switch (value) {
@@ -114,12 +114,12 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
                             System.out.println("1");
                             break;
                         case R.id.radioButtonUplink:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Down-Link", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Up-Link", Toast.LENGTH_SHORT).show();
                             sharedPreferences.edit().putInt("radio_int", 2).apply();
                             System.out.println("2");
                             break;
                         case R.id.radioButtonDownLink:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Voice UP-Link", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Down-Link", Toast.LENGTH_SHORT).show();
                             sharedPreferences.edit().putInt("radio_int", 3).apply();
                             System.out.println("3");
                             break;
