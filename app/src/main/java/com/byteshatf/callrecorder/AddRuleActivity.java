@@ -66,8 +66,9 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
             mCheckedContacts = detailsForThisNote[1];
             setTitle("Edit Category");
             mSpinner.setSelection(mHelpers.getValuesFromSharedPreferences(title, 0));
-            mSwitch.setChecked(mHelpers.getSwitchState((AppGlobals.sSwitchState+title).trim()));
-            String[] items = mCheckedContacts.split(",");
+            mSwitch.setChecked(mHelpers.getSwitchState((AppGlobals.sSwitchState + title).trim()));
+            String conatcts = mCheckedContacts.replace("[","").replace("]", "");
+            String[] items = conatcts.split(",");
             arrayList = new ArrayList<>();
             for (String item : items) {
                 arrayList.add(item);
@@ -122,7 +123,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
 
             if (!editTextData.isEmpty() && editTextData != null && mCheckedContacts != null &&
                     !AppGlobals.getUpdateStatus()) {
-                mDatabaseHelpers.createNewEntry(editTextData,mCheckedContacts);
+                mDatabaseHelpers.createNewEntry(editTextData,arrayList.toString());
                 mHelpers.saveValues(editTextData, mSpinnerValue);
                 mHelpers.saveSwitchState((AppGlobals.sSwitchState+editTextData).trim(), mSwitch.isChecked());
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -130,7 +131,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
             } else if (AppGlobals.getUpdateStatus()) {
                 mHelpers.saveValues(editTextData, mSpinnerValue);
                 mHelpers.saveSwitchState((AppGlobals.sSwitchState + editTextData).trim(), mSwitch.isChecked());
-                mDatabaseHelpers.updateCategory(mId, editTextData, mCheckedContacts);
+                mDatabaseHelpers.updateCategory(mId, editTextData, arrayList.toString());
                 AppGlobals.setUpdateStatus(false);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }

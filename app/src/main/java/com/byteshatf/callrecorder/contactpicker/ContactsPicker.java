@@ -145,6 +145,13 @@ public class ContactsPicker extends AppCompatActivity {
         for (int i = 0; i < names.size(); i++) {
             String formattedName = Html.fromHtml(names.get(i)).toString();
             String formattedNumber = Html.fromHtml(numbers.get(i)).toString();
+            if (formattedName.isEmpty()) {
+                formattedName = " ";
+
+            }
+            if (formattedNumber.isEmpty()) {
+                formattedNumber = " ";
+            }
             String result = formattedName + "\n" + formattedNumber;
             entries.add(result);
         }

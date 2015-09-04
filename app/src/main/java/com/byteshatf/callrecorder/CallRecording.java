@@ -2,9 +2,8 @@ package com.byteshatf.callrecorder;
 
 import android.content.SharedPreferences;
 import android.media.MediaRecorder;
-import android.widget.Toast;
 import android.util.Log;
-import java.io.IOException;
+import android.widget.Toast;
 
 public class CallRecording {
 
