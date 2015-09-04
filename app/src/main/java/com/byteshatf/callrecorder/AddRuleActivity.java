@@ -79,6 +79,12 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        AddRuleActivity.this.finish();
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageButton:
