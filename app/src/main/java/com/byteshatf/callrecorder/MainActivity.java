@@ -114,12 +114,12 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
                             System.out.println("1");
                             break;
                         case R.id.radioButtonUplink:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Down-Link", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Audio Source: Voice UP-Link", Toast.LENGTH_SHORT).show();
                             sharedPreferences.edit().putInt("radio_int", 2).apply();
                             System.out.println("2");
                             break;
                         case R.id.radioButtonDownLink:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Voice UP-Link", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Down-Link", Toast.LENGTH_SHORT).show();
                             sharedPreferences.edit().putInt("radio_int", 3).apply();
                             System.out.println("3");
                             break;
