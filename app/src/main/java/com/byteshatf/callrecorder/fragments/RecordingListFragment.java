@@ -25,22 +25,23 @@ public class RecordingListFragment extends android.support.v4.app.Fragment imple
     private ArrayAdapter<String> arrayAdapter;
     private View view;
     private ListView mRecordList;
+    private Helpers mHelpers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Helpers helpers = new Helpers(getActivity());
+        mHelpers = new Helpers(getActivity());
         view = inflater.inflate(R.layout.list_fragment, container, false);
         mRecordList = (ListView) view.findViewById(R.id.recording_list);
-        ArrayList<String> arrayList = helpers.getAllFilesFromFolder();
-        arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, arrayList);
-        mRecordList.setOnItemLongClickListener(this);
-        mRecordList.setOnItemClickListener(this);
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        ArrayList<String> arrayList = mHelpers.getAllFilesFromFolder();
+        arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, arrayList);
+        mRecordList.setOnItemLongClickListener(this);
+        mRecordList.setOnItemClickListener(this);
         mRecordList.setAdapter(arrayAdapter);
     }
 

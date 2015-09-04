@@ -51,10 +51,12 @@ public class CallRecording {
     }
 
     public void stopRecording() {
-        mediaRecorder.stop();
-        mediaRecorder.reset();
-        mediaRecorder.release();
-        mediaRecorder = null;
-        isRecording = false;
+        if (CallRecording.isRecording) {
+            mediaRecorder.stop();
+            mediaRecorder.reset();
+            mediaRecorder.release();
+            mediaRecorder = null;
+            isRecording = false;
+        }
     }
 }
