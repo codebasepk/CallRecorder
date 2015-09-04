@@ -16,7 +16,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -84,8 +83,6 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
             dialog.setContentView(R.layout.dialog_layout);
             dialog.setTitle("select Mic source");
             RadioGroup radioGroup = (RadioGroup) dialog.findViewById(R.id.radioGroup);
-            RadioButton checkedRadioButton = (RadioButton)radioGroup.
-                    findViewById(radioGroup.getCheckedRadioButtonId());
             int value = sharedPreferences.getInt("radio_int", 0);
             switch (value) {
                 case 0:
@@ -196,6 +193,10 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         MainActivity.this.finish();
+        startActivity(startMain);
     }
 }
