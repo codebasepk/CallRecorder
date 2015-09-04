@@ -171,7 +171,7 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
 
     private String getDirectionThumbnail(String title) {
         String uriBase = "android.resource://com.fgm.callrecorder/";
-        int specificIcon = mHelpers.getValuesFromSharedPreferences(title, Call.TURN_OFF);
+        int specificIcon = mHelpers.getValuesFromSharedPreferences(title, Call.SHOW_INCOMING_CALL);
         return getDirectionIcon(uriBase, specificIcon);
     }
 
@@ -185,7 +185,7 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
             case Call.SHOW_INCOMING_OUTGOING:
                 return uriBase + R.drawable.incoming_outgoing_call;
             default:
-                return uriBase + R.drawable.off;
+                return uriBase + R.drawable.incoming_call;
         }
     }
 
@@ -198,6 +198,5 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
         static final int SHOW_INCOMING_CALL = 0;
         static final int SHOW_OUTGOING_CALL = 1;
         static final int SHOW_INCOMING_OUTGOING = 2;
-        public static final int TURN_OFF = 3;
     }
 }
