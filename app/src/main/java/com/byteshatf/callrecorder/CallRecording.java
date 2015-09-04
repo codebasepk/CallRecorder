@@ -15,6 +15,7 @@ public class CallRecording {
 
     public void startRecord() {
         mHelpers = new Helpers(AppGlobals.getContext());
+        sharedPreferences = mHelpers.getPreferenceManager();
         int recordingSource = sharedPreferences.getInt("radio_int", 0);
         mediaRecorder = new MediaRecorder();
         try {

@@ -3,10 +3,8 @@ package com.byteshatf.callrecorder.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,10 +33,15 @@ public class RecordingListFragment extends android.support.v4.app.Fragment imple
         mRecordList = (ListView) view.findViewById(R.id.recording_list);
         ArrayList<String> arrayList = helpers.getAllFilesFromFolder();
         arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, arrayList);
-        mRecordList.setAdapter(arrayAdapter);
         mRecordList.setOnItemLongClickListener(this);
         mRecordList.setOnItemClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mRecordList.setAdapter(arrayAdapter);
     }
 
     @Override
