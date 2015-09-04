@@ -151,11 +151,12 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
                         System.out.println("OK");
                     } else {
                         mCheckedContacts = extras.getString("selected_contacts");
+                        ArrayList<String> mCheckedNames = (ArrayList<String>) extras.get("selected_names");
                         if (mCheckedContacts != null) {
                             mContactsListView.setAdapter(null);
-                            String[] items = mCheckedContacts.split(",");
+//                            String[] items = mCheckedNames.split(",");
                             arrayList = new ArrayList<>();
-                            for (String item : items) {
+                            for (String item : mCheckedNames) {
                                 arrayList.add(item);
                             }
                             ArrayAdapter<String> arrayAdapter = new FinalizedContacts(getApplicationContext(),

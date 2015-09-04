@@ -116,16 +116,21 @@ public class ContactsPicker extends AppCompatActivity {
             case R.id.action_done:
                 SparseBooleanArray array = mListView.getCheckedItemPositions();
                 StringBuilder stringBuilder = new StringBuilder();
+                StringBuilder namesBuilder = new StringBuilder();
                 for (int i = 0; i < mListView.getCount(); i++) {
                     if (array.get(i)) {
                         String out = (String) mListView.getAdapter().getItem(i);
                         String lines[] = out.split("\\r?\\n");
                         stringBuilder.append(lines[1]).append(",");
+                        namesBuilder.append(lines[0]).append(",");
                     }
                 }
                 Intent intent = new Intent();
                 if (stringBuilder.length() != 0) {
                     intent.putExtra("selected_contacts", stringBuilder.toString());
+                    intent.putExtra(
+                            "selected_names",
+                            getFormattedContacts(namesBuilder.toString(), stringBuilder.toString()));
                 }
                 intent.putExtra("temporary", true);
                 setResult(AppGlobals.RESULT_OK, intent);
@@ -140,6 +145,19 @@ public class ContactsPicker extends AppCompatActivity {
         for (int i = 0; i < names.size(); i++) {
             String formattedName = Html.fromHtml(names.get(i)).toString();
             String formattedNumber = Html.fromHtml(numbers.get(i)).toString();
+            String result = formattedName + "\n" + formattedNumber;
+            entries.add(result);
+        }
+        return entries;
+    }
+
+    private ArrayList<String> getFormattedContacts(String names, String numbers) {
+        String[] names1 = names.split(",");
+        String[] numbers1 = numbers.split(",");
+        ArrayList<String> entries = new ArrayList<>();
+        for (int i = 0; i < names1.length; i++) {
+            String formattedName = Html.fromHtml(names1[i]).toString();
+            String formattedNumber = Html.fromHtml(numbers1[i]).toString();
             String result = formattedName + "\n" + formattedNumber;
             entries.add(result);
         }
