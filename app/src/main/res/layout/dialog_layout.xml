@@ -9,38 +9,40 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp">
 
         <RadioButton
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="MIC (Recommended)"
-            android:textSize="13dp"
-            android:layout_marginTop="3dp"
+            android:textSize="14dp"
+            android:layout_marginTop="4dp"
             android:id="@+id/radioButtonMic" />
 
         <RadioButton
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Voice Call"
-            android:textSize="13dp"
-            android:layout_marginTop="3dp"
+            android:textSize="14dp"
+            android:layout_marginTop="4dp"
             android:id="@+id/radioButtonVoiceCall" />
 
         <RadioButton
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Voice Up-Link"
-            android:textSize="13dp"
-            android:layout_marginTop="3dp"
+            android:textSize="14dp"
+            android:layout_marginTop="4dp"
             android:id="@+id/radioButtonUplink" />
 
         <RadioButton
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Voice Down-Link"
-            android:textSize="13dp"
-            android:layout_marginTop="3dp"
+            android:textSize="14dp"
+            android:layout_marginTop="4dp"
             android:id="@+id/radioButtonDownLink" />
     </RadioGroup>
 </RelativeLayout>

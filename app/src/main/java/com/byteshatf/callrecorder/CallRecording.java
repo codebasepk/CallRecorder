@@ -33,20 +33,16 @@ public class CallRecording {
                     mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_UPLINK);
                     break;
             }
-        } catch (Exception e) {
-            Toast.makeText(AppGlobals.getContext(), "Error: Recording source incompatible", Toast.LENGTH_SHORT).show();
-        }
-        mediaRecorder.setAudioEncodingBitRate(96000);
-        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
-        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-        mediaRecorder.setOutputFile(AppGlobals.getDataDirectory("CallRec") + "/" + AppGlobals.sCurrentNumber + "_" + Helpers.getTimeStamp() + ".aac");
-        try {
+            mediaRecorder.setAudioEncodingBitRate(96000);
+            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+            mediaRecorder.setOutputFile(AppGlobals.getDataDirectory("CallRec") + "/" + AppGlobals.sCurrentNumber + "_" + Helpers.getTimeStamp() + ".aac");
             mediaRecorder.prepare();
             mediaRecorder.start();
-            Log.i(AppGlobals.getLogTag(getClass()), "Recording started .....");
+            Log.i(AppGlobals.getLogTag(getClass()), "Recording started.....");
             isRecording = true;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Toast.makeText(AppGlobals.getContext(), "Error: Recording source incompatible", Toast.LENGTH_SHORT).show();
         }
     }
 
