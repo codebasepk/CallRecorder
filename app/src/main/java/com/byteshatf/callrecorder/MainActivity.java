@@ -1,7 +1,7 @@
 package com.byteshatf.callrecorder;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -16,6 +16,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.byteshatf.callrecorder.fragments.RecordingListFragment;
@@ -78,35 +80,57 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            final CharSequence[] items = {"Mic", "Voice Call", "Voice Up-Link", "Voice Down-Link"};
-            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Select Audio Source");
-            builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int item) {
-                    switch(item)
-                    {
-                        case 0:
+            final Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.dialog_layout);
+            dialog.setTitle("select Mic source");
+            RadioGroup radioGroup = (RadioGroup) dialog.findViewById(R.id.radioGroup);
+            RadioButton checkedRadioButton = (RadioButton)radioGroup.
+                    findViewById(radioGroup.getCheckedRadioButtonId());
+            int value = sharedPreferences.getInt("radio_int", 0);
+            switch (value) {
+                case 0:
+                    radioGroup.check(R.id.radioButtonMic);
+                    break;
+                case 1:
+                    radioGroup.check(R.id.radioButtonVoiceCall);
+                    break;
+                case 2:
+                    radioGroup.check(R.id.radioButtonUplink);
+                    break;
+                case 3:
+                    radioGroup.check(R.id.radioButtonDownLink);
+                    break;
+            }
+            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    System.out.println(checkedId);
+                    switch(checkedId) {
+                        case R.id.radioButtonMic:
                             Toast.makeText(getApplicationContext(), "Audio Source: MIC", Toast.LENGTH_SHORT).show();
-                            sharedPreferences.edit().putInt("radio_int", 0);
+                            sharedPreferences.edit().putInt("radio_int", 0).apply();
+                            System.out.println("0");
                             break;
-                        case 1:
+                        case R.id.radioButtonVoiceCall:
                             Toast.makeText(getApplicationContext(), "Audio Source: Voice Call", Toast.LENGTH_SHORT).show();
-                            sharedPreferences.edit().putInt("radio_int", 1);
+                            sharedPreferences.edit().putInt("radio_int", 1).apply();
+                            System.out.println("1");
                             break;
-                        case 2:
+                        case R.id.radioButtonUplink:
                             Toast.makeText(getApplicationContext(), "Audio Source: Voice Down-Link", Toast.LENGTH_SHORT).show();
-                            sharedPreferences.edit().putInt("radio_int", 2);
+                            sharedPreferences.edit().putInt("radio_int", 2).apply();
+                            System.out.println("2");
                             break;
-                        case 3:
+                        case R.id.radioButtonDownLink:
                             Toast.makeText(getApplicationContext(), "Audio Source: Voice UP-Link", Toast.LENGTH_SHORT).show();
-                            sharedPreferences.edit().putInt("radio_int", 3);
+                            sharedPreferences.edit().putInt("radio_int", 3).apply();
+                            System.out.println("3");
                             break;
                     }
-                    levelDialog.dismiss();
+                    dialog.dismiss();
                 }
             });
-            levelDialog = builder.create();
-            levelDialog.show();
+            dialog.show();
         }
 
         if (id == R.id.action_add) {
