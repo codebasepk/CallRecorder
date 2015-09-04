@@ -47,8 +47,6 @@ public class CallRecording {
             isRecording = true;
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (RuntimeException e) {
-            Log.i(AppGlobals.getLogTag(getClass()), "crash at audio Source");
         }
     }
 
