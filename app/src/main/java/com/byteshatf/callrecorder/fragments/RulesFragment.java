@@ -57,8 +57,9 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
         mCheckBox.setChecked(mSharedPreferences.getBoolean(AppGlobals.sCheckBoxState, false));
         mCheckBox.setOnCheckedChangeListener(this);
         arrayList = mDatabaseHelpers.getAllPresentNotes();
-        if (arrayList.isEmpty() && arrayList.size() == 0) {
+        if (mSharedPreferences.getBoolean("fresh_install", true)) {
             mHelpers.showDialogForFirstTime();
+            mSharedPreferences.edit().putBoolean("fresh_install", false).apply();
         } else {
             mArrayAdapter = new CategoriesAdapter(getActivity()
                     .getApplicationContext(), R.layout.main_listview, arrayList);
