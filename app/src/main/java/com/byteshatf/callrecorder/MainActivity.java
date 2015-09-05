@@ -134,6 +134,15 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
             Intent intent = new Intent(getApplicationContext(), AddRuleActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.menu_item_share) {
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            String shareBody = "Record any phone conversation from who you want, at any time " +
+                    "automatically. \n \n"+ "Donwload at https://play.google.com/store/apps/details" +
+                    "?id=com.fgm.recorder";
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share via"));
+        }
 
         return super.onOptionsItemSelected(item);
     }

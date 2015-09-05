@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -26,7 +27,8 @@ import com.byteshatf.callrecorder.database.DatabaseHelpers;
 import java.util.ArrayList;
 
 
-public class AddRuleActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddRuleActivity extends AppCompatActivity implements View.OnClickListener,
+        Switch.OnCheckedChangeListener {
 
     private ImageButton imageButton;
     private EditText editText;
@@ -42,6 +44,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     private Helpers mHelpers;
     private ArrayList<String> arrayList = null;
     private String mId = null;
+    private TextView mTextViewSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,10 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
         mSpinner = (Spinner) findViewById(R.id.spinner_add_fragment);
         imageButton = (ImageButton) findViewById(R.id.imageButton);
         mSwitch = (Switch) findViewById(R.id.switch1);
+        mSwitch.setOnCheckedChangeListener(this);
+        mTextViewSwitch = (TextView) findViewById(R.id.switchTextView);
+        mTextViewSwitch.setText("On");
+        mTextViewSwitch.setTextColor(Color.GREEN);
         editText = (EditText) findViewById(R.id.et_title);
         mContactsListView = (ListView) findViewById(R.id.lv_edit_rule);
         imageButton.setOnClickListener(this);
@@ -67,6 +74,13 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
             setTitle("Edit Category");
             mSpinner.setSelection(mHelpers.getValuesFromSharedPreferences(title, 0));
             mSwitch.setChecked(mHelpers.getSwitchState((AppGlobals.sSwitchState + title).trim()));
+            if (mSwitch.isChecked()) {
+                mTextViewSwitch.setText("On");
+                mTextViewSwitch.setTextColor(Color.GREEN);
+            } else {
+                mTextViewSwitch.setText("Off");
+                mTextViewSwitch.setTextColor(Color.RED);
+            }
             String conatcts = mCheckedContacts.replace("[","").replace("]", "");
             String[] items = conatcts.split(",");
             arrayList = new ArrayList<>();
@@ -170,6 +184,22 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 }
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()) {
+            case R.id.switch1:
+                if (mSwitch.isChecked()) {
+                    mTextViewSwitch.setText("On");
+                    mTextViewSwitch.setTextColor(Color.GREEN);
+                } else {
+                    mTextViewSwitch.setText("Off");
+                    mTextViewSwitch.setTextColor(Color.RED);
+                }
+                break;
+        }
+
     }
 
     class FinalizedContacts extends ArrayAdapter<String> {
