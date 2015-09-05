@@ -4,27 +4,38 @@
     android:layout_height="wrap_content"
     android:padding="10dp"
     android:id="@+id/linearLayout">
+    <LinearLayout
+        android:id="@+id/linearLayoutSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#d3d3d3"
+        android:layout_margin="2dp"
+        android:orientation="horizontal"
+        >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:text="Record On :"
+        android:text="Special rule :"
         android:textStyle="bold"
+        android:padding="5dp"
         android:layout_marginTop="5dp"/>
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_main"
         android:layout_alignParentRight="true"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"/>
+    </LinearLayout>
     <CheckBox
         android:id="@+id/checkboxUnknownCalls"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:text="Always record all unknown calls"
         android:checked="false"
-        android:layout_below="@+id/spinner_main"
+        android:layout_below="@+id/linearLayoutSpinner"
         android:visibility="invisible"/>
     <ListView
         android:id="@+id/rulesList"
