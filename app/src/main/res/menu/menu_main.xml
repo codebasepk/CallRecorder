@@ -3,20 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="ifRoom" />
-
-    <item android:id="@+id/action_add"
-        android:icon="@drawable/ic_add_list"
-        app:showAsAction="ifRoom"
-        android:title="Settings" />
     <item
         android:id="@+id/menu_item_share"
         android:icon="@android:drawable/ic_menu_share"
+        app:showAsAction="ifRoom"
         android:title="Share"
-        android:actionProviderClass=
-            "android.widget.ShareActionProvider" />
+        android:actionProviderClass="android.widget.ShareActionProvider" />
+
+    <item
+        android:id="@+id/action_add"
+        android:icon="@drawable/ic_add_list"
+        app:showAsAction="always"
+        android:title="Settings" />
 
 </menu>

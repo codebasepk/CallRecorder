@@ -78,58 +78,6 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            final Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.dialog_layout);
-            dialog.setTitle("Select Audio Source");
-            RadioGroup radioGroup = (RadioGroup) dialog.findViewById(R.id.radioGroup);
-            int value = sharedPreferences.getInt("radio_int", 0);
-            switch (value) {
-                case 0:
-                    radioGroup.check(R.id.radioButtonMic);
-                    break;
-                case 1:
-                    radioGroup.check(R.id.radioButtonVoiceCall);
-                    break;
-                case 2:
-                    radioGroup.check(R.id.radioButtonUplink);
-                    break;
-                case 3:
-                    radioGroup.check(R.id.radioButtonDownLink);
-                    break;
-            }
-            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    System.out.println(checkedId);
-                    switch(checkedId) {
-                        case R.id.radioButtonMic:
-                            Toast.makeText(getApplicationContext(), "Audio Source: MIC", Toast.LENGTH_SHORT).show();
-                            sharedPreferences.edit().putInt("radio_int", 0).apply();
-                            System.out.println("0");
-                            break;
-                        case R.id.radioButtonVoiceCall:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Call", Toast.LENGTH_SHORT).show();
-                            sharedPreferences.edit().putInt("radio_int", 1).apply();
-                            System.out.println("1");
-                            break;
-                        case R.id.radioButtonUplink:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Up-Link", Toast.LENGTH_SHORT).show();
-                            sharedPreferences.edit().putInt("radio_int", 2).apply();
-                            System.out.println("2");
-                            break;
-                        case R.id.radioButtonDownLink:
-                            Toast.makeText(getApplicationContext(), "Audio Source: Voice Down-Link", Toast.LENGTH_SHORT).show();
-                            sharedPreferences.edit().putInt("radio_int", 3).apply();
-                            System.out.println("3");
-                            break;
-                    }
-                    dialog.dismiss();
-                }
-            });
-            dialog.show();
-        }
-
         if (id == R.id.action_add) {
             Intent intent = new Intent(getApplicationContext(), AddRuleActivity.class);
             startActivity(intent);
