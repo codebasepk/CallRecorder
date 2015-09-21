@@ -6,6 +6,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -64,6 +67,28 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
         editText = (EditText) findViewById(R.id.et_title);
         mContactsListView = (ListView) findViewById(R.id.lv_edit_rule);
         imageButton.setOnClickListener(this);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+                String str = s.toString();
+                if(str.length() > 0 && str.startsWith(" ")){
+                    Log.v("","Cannot begin with space");
+                    editText.setText("");
+                }else{
+                    Log.v("", "Doesn't contain space, good to go!");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         if (getIntent().getExtras() != null) {
             AppGlobals.setUpdateStatus(true);
             String title = getIntent().getExtras().getString("title", "");
@@ -81,8 +106,8 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
                 mTextViewSwitch.setText("Off");
                 mTextViewSwitch.setTextColor(Color.RED);
             }
-            String conatcts = mCheckedContacts.replace("[","").replace("]", "");
-            String[] items = conatcts.split(",");
+            String contacts = mCheckedContacts.replace("[","").replace("]", "");
+            String[] items = contacts.split(",");
             arrayList = new ArrayList<>();
             for (String item : items) {
                 arrayList.add(item);
@@ -137,9 +162,10 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
 
             if (!editTextData.isEmpty() && editTextData != null && mCheckedContacts != null &&
                     !AppGlobals.getUpdateStatus()) {
-                mDatabaseHelpers.createNewEntry(editTextData,arrayList.toString());
+                mDatabaseHelpers.createNewEntry(editTextData, arrayList.toString());
                 mHelpers.saveValues(editTextData, mSpinnerValue);
-                mHelpers.saveSwitchState((AppGlobals.sSwitchState+editTextData).trim(), mSwitch.isChecked());
+                mHelpers.saveSwitchState((AppGlobals.sSwitchState + editTextData).trim(), mSwitch.isChecked());
+                AddRuleActivity.this.finish();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             } else if (AppGlobals.getUpdateStatus()) {
@@ -147,6 +173,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
                 mHelpers.saveSwitchState((AppGlobals.sSwitchState + editTextData).trim(), mSwitch.isChecked());
                 mDatabaseHelpers.updateCategory(mId, editTextData, arrayList.toString());
                 AppGlobals.setUpdateStatus(false);
+                AddRuleActivity.this.finish();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         }
