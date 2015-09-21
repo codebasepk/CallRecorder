@@ -48,6 +48,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
     private ArrayList<String> arrayList = null;
     private String mId = null;
     private TextView mTextViewSwitch;
+    private static String sDataFromEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,9 +91,9 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
         if (getIntent().getExtras() != null) {
-            AppGlobals.setUpdateStatus(true);
             String title = getIntent().getExtras().getString("title", "");
             editText.setText(title);
+            sDataFromEditText = title;
             String[] detailsForThisNote = mDatabaseHelpers.retrieveNoteDetails(title);
             mId = detailsForThisNote[0];
             mCheckedContacts = detailsForThisNote[1];
@@ -115,6 +116,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
             ArrayAdapter<String> arrayAdapter = new FinalizedContacts(getApplicationContext(),
                     R.layout.row, arrayList);
             mContactsListView.setAdapter(arrayAdapter);
+            AppGlobals.setUpdateStatus(true);
         }
     }
 
@@ -159,22 +161,32 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
                         Toast.LENGTH_SHORT).show();
                 return false;
             }
+            System.out.println(AppGlobals.getUpdateStatus());
 
             if (!editTextData.isEmpty() && editTextData != null && mCheckedContacts != null &&
                     !AppGlobals.getUpdateStatus()) {
-                mDatabaseHelpers.createNewEntry(editTextData, arrayList.toString());
+                System.out.println("new entry");
+                mDatabaseHelpers.createNewEntry(editTextData, arrayList);
                 mHelpers.saveValues(editTextData, mSpinnerValue);
                 mHelpers.saveSwitchState((AppGlobals.sSwitchState + editTextData).trim(), mSwitch.isChecked());
                 AddRuleActivity.this.finish();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             } else if (AppGlobals.getUpdateStatus()) {
-                mHelpers.saveValues(editTextData, mSpinnerValue);
-                mHelpers.saveSwitchState((AppGlobals.sSwitchState + editTextData).trim(), mSwitch.isChecked());
-                mDatabaseHelpers.updateCategory(mId, editTextData, arrayList.toString());
-                AppGlobals.setUpdateStatus(false);
-                AddRuleActivity.this.finish();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                System.out.println(mDatabaseHelpers.checkIfItemAlreadyExist(editTextData));
+                if (mDatabaseHelpers.checkIfItemAlreadyExist(editTextData) &&
+                        !editTextData.equals(sDataFromEditText) ) {
+                    Toast.makeText(this, "Rule already exist", Toast.LENGTH_SHORT).show();
+                    return false;
+                } else {
+                    System.out.println("update");
+                    mHelpers.saveValues(editTextData, mSpinnerValue);
+                    mHelpers.saveSwitchState((AppGlobals.sSwitchState + editTextData).trim(), mSwitch.isChecked());
+                    mDatabaseHelpers.updateCategory(mId, editTextData, arrayList.toString());
+                    AppGlobals.setUpdateStatus(false);
+                    AddRuleActivity.this.finish();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
             }
         }
         return super.onOptionsItemSelected(item);

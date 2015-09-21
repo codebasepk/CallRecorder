@@ -31,11 +31,11 @@ public class DatabaseHelpers extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void createNewEntry(String title, String contacts) {
+    public void createNewEntry(String title, ArrayList<String> contacts) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DatabaseConstants.TITLE, title);
-        values.put(DatabaseConstants.CONTACTS, contacts);
+        values.put(DatabaseConstants.CONTACTS, String.valueOf(contacts));
         values.put(DatabaseConstants.DATE_COLUMN, Helpers.getTimeStampForDatabase());
         sqLiteDatabase.insert(DatabaseConstants.TABLE_NAME, null, values);
         Log.i(AppGlobals.getLogTag(getClass()), "created New Entry");
@@ -69,6 +69,7 @@ public class DatabaseHelpers extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             list[0] = (cursor.getString(cursor.getColumnIndex(DatabaseConstants.ID_COLUMN)));
             list[1] = (cursor.getString(cursor.getColumnIndex(DatabaseConstants.CONTACTS)));
+            System.out.println(list[1]);
             Log.i(AppGlobals.getLogTag(getClass()), " Data retrieved ....");
         }
         sqLiteDatabase.close();
@@ -91,5 +92,12 @@ public class DatabaseHelpers extends SQLiteOpenHelper {
         sqLiteDatabase.delete(DatabaseConstants.TABLE_NAME, DatabaseConstants.TITLE +
                 "=?", new String[]{value});
         sqLiteDatabase.close();
+    }
+
+    public boolean checkIfItemAlreadyExist(String item) {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + DatabaseConstants.TABLE_NAME
+                + " WHERE "+DatabaseConstants.TITLE+"  = '" + item + "'", null);
+        return cursor.getCount() > 0;
     }
 }

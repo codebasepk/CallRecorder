@@ -80,9 +80,14 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
     public void onResume() {
         super.onResume();
         if (mListViewDisplayed) {
+            arrayList = mDatabaseHelpers.getAllPresentNotes();
+            mArrayAdapter = new CategoriesAdapter(getActivity()
+                    .getApplicationContext(), R.layout.main_listview, arrayList);
+            mListViewDisplayed = true;
             mListView.setAdapter(mArrayAdapter);
             mListView.setOnItemClickListener(this);
             mListView.setOnItemLongClickListener(this);
+            mArrayAdapter.notifyDataSetChanged();
         }
     }
 
@@ -171,7 +176,7 @@ public class RulesFragment extends android.support.v4.app.Fragment implements Sp
     }
 
     private String getDirectionThumbnail(String title) {
-        String uriBase = "android.resource://com.fgm.callrecorder/";
+        String uriBase = "android.resource://com.fgm.recorder/";
         int specificIcon = mHelpers.getValuesFromSharedPreferences(title, Call.SHOW_INCOMING_CALL);
         return getDirectionIcon(uriBase, specificIcon);
     }
