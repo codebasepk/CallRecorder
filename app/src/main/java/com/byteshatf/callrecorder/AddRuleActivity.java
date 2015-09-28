@@ -64,7 +64,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
         mSwitch.setOnCheckedChangeListener(this);
         mTextViewSwitch = (TextView) findViewById(R.id.switchTextView);
         mTextViewSwitch.setText("On");
-        mTextViewSwitch.setTextColor(Color.GREEN);
+        mTextViewSwitch.setTextColor(Color.parseColor("#229636"));
         editText = (EditText) findViewById(R.id.et_title);
         mContactsListView = (ListView) findViewById(R.id.lv_edit_rule);
         imageButton.setOnClickListener(this);
@@ -102,7 +102,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
             mSwitch.setChecked(mHelpers.getSwitchState((AppGlobals.sSwitchState + title).trim()));
             if (mSwitch.isChecked()) {
                 mTextViewSwitch.setText("On");
-                mTextViewSwitch.setTextColor(Color.GREEN);
+                mTextViewSwitch.setTextColor(Color.parseColor("#229636"));
             } else {
                 mTextViewSwitch.setText("Off");
                 mTextViewSwitch.setTextColor(Color.RED);
@@ -231,7 +231,7 @@ public class AddRuleActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.switch1:
                 if (mSwitch.isChecked()) {
                     mTextViewSwitch.setText("On");
-                    mTextViewSwitch.setTextColor(Color.GREEN);
+                    mTextViewSwitch.setTextColor(Color.parseColor("#229636"));
                 } else {
                     mTextViewSwitch.setText("Off");
                     mTextViewSwitch.setTextColor(Color.RED);
