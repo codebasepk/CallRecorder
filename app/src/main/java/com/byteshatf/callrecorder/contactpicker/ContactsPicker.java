@@ -157,16 +157,20 @@ public class ContactsPicker extends AppCompatActivity {
         }
         return entries;
     }
-
     private ArrayList<String> getFormattedContacts(String names, String numbers) {
-        String[] names1 = names.split(",");
-        String[] numbers1 = numbers.split(",");
         ArrayList<String> entries = new ArrayList<>();
-        for (int i = 0; i < names1.length; i++) {
-            String formattedName = Html.fromHtml(names1[i]).toString();
-            String formattedNumber = Html.fromHtml(numbers1[i]).toString();
-            String result = formattedName + "\n" + formattedNumber;
-            entries.add(result);
+        try {
+            String[] names1 = names.split(",");
+            String[] numbers1 = numbers.split(",");
+            entries = new ArrayList<>();
+            for (int i = 0; i < names1.length; i++) {
+                String formattedName = Html.fromHtml(names1[i]).toString();
+                String formattedNumber = Html.fromHtml(numbers1[i]).toString();
+                String result = formattedName + "\n" + formattedNumber;
+                entries.add(result);
+            }
+            return entries;
+        } catch (IndexOutOfBoundsException ignore) {
         }
         return entries;
     }
